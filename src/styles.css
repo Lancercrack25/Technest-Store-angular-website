@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+/* Fondo del login */
+.login {
+  height: 100vh;
+  background-image: url('https://img.freepik.com/fotos-premium/componentes-computadora-sobre-fondo-negro_160097-300.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
