@@ -2,8 +2,10 @@
 .login-wrapper {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 /* Tarjeta tipo vidrio */
@@ -26,6 +28,19 @@
   margin-bottom: 30px;
   font-weight: 600;
   letter-spacing: 1px;
+}
+
+ h2 {
+  font-size: 68px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  background: linear-gradient(90deg, #ffffff, #f1f1f1, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.747);
 }
 
 /* Inputs */
@@ -60,7 +75,7 @@
   font-weight: 600;
   font-size: 14px;
 
-  background: white;
+  background: rgb(255, 244, 244);
   color: #333;
   transition: 0.3s ease;
 }

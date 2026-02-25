@@ -9,7 +9,6 @@ app.use(express.json());
 
 // ==================== INICIALIZACIÓN ====================
 await initDatabase(); // crea base y tablas si no existen
-
 // ==================== MIDDLEWARE SIMPLIFICADO ====================
 // Simulación de middleware para admin, solo permite pasar
 function adminOnly(req, res, next) { next(); }

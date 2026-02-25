@@ -101,7 +101,7 @@ export async function initDatabase() {
       );
     `);
 
-    console.log('Tablas creadas correctamente');
+    console.log('Tablas creadas correctamente en la base de datos');
 
     // Cerrar conexión cuando termines
     await pool.end();
