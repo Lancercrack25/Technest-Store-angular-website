@@ -1,0 +1,91 @@
+/* Centrado total */
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tarjeta tipo vidrio */
+.login-card {
+  width: 360px;
+  padding: 45px 35px;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  color: white;
+}
+
+/* Título */
+.login-card h1 {
+  margin-bottom: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Inputs */
+.input-box {
+  margin-bottom: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Botón */
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+
+  background: white;
+  color: #333;
+  transition: 0.3s ease;
+}
+
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Links */
+.extra-links {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.extra-links a {
+  font-size: 13px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.85);
+  transition: 0.3s;
+}
+
+.extra-links a:hover {
+  color: white;
+  text-decoration: underline;
+}
