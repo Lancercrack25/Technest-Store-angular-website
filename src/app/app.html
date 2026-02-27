@@ -1,11 +1,11 @@
 <!-- Esto sirve para definir los estilos globales de cada componente  por individual -->
 <!-- recuerden que cada que definan un nuevo componente agreguenlo aqui al div para poder darl estilos según la ruta -->
- <!--'nombre de la clase para el css global': router.url === '/ruta-del-componente creado'   -->
+<!--'nombre de la clase para el css global': router.url === '/ruta-del-componente creado'   -->
 <div [ngClass]="{
   'login': router.url === '/',
   'registro': router.url === '/registro',
   'inicio': router.url === '/inicio'
 }">
 
-  <router-outlet></router-outlet>  
-</div> 
+  <router-outlet></router-outlet>
+</div>

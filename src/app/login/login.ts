@@ -1,23 +1,24 @@
-import { Component,HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
-import { Adminlogin } from '../adminlogin/adminlogin';
+import { AdminLogin } from '../admin-login/admin-login';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink,FormsModule],
+  imports: [RouterLink, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
+
 export class Login {
-    nombre = '';
+  nombre = '';
   password = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   // ==========================
   // LOGIN NORMAL
@@ -70,7 +71,7 @@ export class Login {
     if (event.ctrlKey && event.key.toLowerCase() === 'l') {
       event.preventDefault();
 
-      this.router.navigate(['/adminlogin']); 
+      this.router.navigate(['/admin/login']);
       // 👆 cambia la ruta si quieres otro componente
     }
   }
