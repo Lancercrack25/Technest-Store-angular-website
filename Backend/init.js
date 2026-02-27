@@ -7,7 +7,6 @@ export async function initDatabase() {
   try {
     console.log('Inicializando base de datos...');
 
-    // 1. Crear base si no existe
     const res = await adminPool.query(
       "SELECT 1 FROM pg_database WHERE datname = 'tienda_pc'"
     );
@@ -15,14 +14,10 @@ export async function initDatabase() {
     if (res.rowCount === 0) {
       await adminPool.query('CREATE DATABASE tienda_pc');
       console.log('Base de datos creada');
-    } else {
-      console.log('Base de datos ya existe');
     }
 
-    // Cerramos adminPool porque ya no lo necesitamos
     await adminPool.end();
 
-    // 2. Crear nuevo pool conectado a tienda_pc (ya creada)
     const pool = new Pool({
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),
@@ -31,79 +26,115 @@ export async function initDatabase() {
       database: 'tienda_pc',
     });
 
-    // 3. Crear tablas con este pool
+    // ================= USUARIO =================
     await pool.query(`
-      CREATE TABLE IF NOT EXISTS usuarios (
-        id SERIAL PRIMARY KEY,
+      CREATE TABLE IF NOT EXISTS usuario (
+        id_usuario SERIAL PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
-        genero VARCHAR(50),
-        correo VARCHAR(120) UNIQUE NOT NULL,
+        email VARCHAR(120) UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        telefono VARCHAR(20)
+        telefono VARCHAR(20),
+        rol VARCHAR(20) DEFAULT 'cliente',
+        creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
-    // ... (resto de tablas igual, usando await pool.query)
-
+    // ================= CATEGORIA =================
     await pool.query(`
-      CREATE TABLE IF NOT EXISTS proveedores (
-        id SERIAL PRIMARY KEY,
+      CREATE TABLE IF NOT EXISTS categoria (
+        id_categoria SERIAL PRIMARY KEY,
+        nombre VARCHAR(100) UNIQUE NOT NULL
+      );
+    `);
+
+    // ================= PROVEEDOR =================
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS proveedor (
+        id_proveedor SERIAL PRIMARY KEY,
         nombre VARCHAR(120) NOT NULL,
         telefono VARCHAR(20),
-        correo VARCHAR(120),
-        empresa VARCHAR(120)
+        correo VARCHAR(120)
       );
     `);
 
+    // ================= PRODUCTO =================
     await pool.query(`
-      CREATE TABLE IF NOT EXISTS productos (
-        id SERIAL PRIMARY KEY,
+      CREATE TABLE IF NOT EXISTS producto (
+        id_producto SERIAL PRIMARY KEY,
+        sku VARCHAR(50) UNIQUE NOT NULL,
         nombre VARCHAR(150) NOT NULL,
         descripcion TEXT,
         precio NUMERIC(10,2) NOT NULL CHECK (precio >= 0),
+        garantia_meses INT,
+        id_categoria INT REFERENCES categoria(id_categoria),
+        id_proveedor INT REFERENCES proveedor(id_proveedor)
+      );
+    `);
+
+    // ================= INVENTARIO =================
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS inventario (
+        id_inventario SERIAL PRIMARY KEY,
+        id_producto INT UNIQUE REFERENCES producto(id_producto) ON DELETE CASCADE,
         stock INT NOT NULL CHECK (stock >= 0),
-        proveedor_id INT REFERENCES proveedores(id) ON DELETE SET NULL
+        stock_minimo INT NOT NULL CHECK (stock_minimo >= 0),
+        ubicacion VARCHAR(100)
       );
     `);
 
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS ventas (
-        id SERIAL PRIMARY KEY,
-        fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        total NUMERIC(10,2) NOT NULL CHECK (total >= 0),
-        usuario_id INT REFERENCES usuarios(id) ON DELETE SET NULL
-      );
-    `);
-
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS detalle_venta (
-        id SERIAL PRIMARY KEY,
-        venta_id INT REFERENCES ventas(id) ON DELETE CASCADE,
-        producto_id INT REFERENCES productos(id),
-        cantidad INT NOT NULL CHECK (cantidad > 0),
-        precio NUMERIC(10,2) NOT NULL
-      );
-    `);
-
+    // ================= CARRITO =================
     await pool.query(`
       CREATE TABLE IF NOT EXISTS carrito (
-        id SERIAL PRIMARY KEY,
-        usuario_id INT UNIQUE REFERENCES usuarios(id) ON DELETE CASCADE
+        id_carrito SERIAL PRIMARY KEY,
+        id_usuario INT UNIQUE REFERENCES usuario(id_usuario) ON DELETE CASCADE,
+        creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
+    // ================= CARRITO_DETALLE =================
     await pool.query(`
       CREATE TABLE IF NOT EXISTS carrito_detalle (
-        id SERIAL PRIMARY KEY,
-        carrito_id INT REFERENCES carrito(id) ON DELETE CASCADE,
-        producto_id INT REFERENCES productos(id),
+        id_detalle SERIAL PRIMARY KEY,
+        id_carrito INT REFERENCES carrito(id_carrito) ON DELETE CASCADE,
+        id_producto INT REFERENCES producto(id_producto),
         cantidad INT NOT NULL CHECK (cantidad > 0)
       );
     `);
 
-    console.log('Tablas creadas correctamente en la base de datos');
+    // ================= VENTA =================
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS venta (
+        id_venta SERIAL PRIMARY KEY,
+        fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        estado VARCHAR(20) DEFAULT 'pendiente',
+        total NUMERIC(10,2) NOT NULL CHECK (total >= 0),
+        id_usuario INT REFERENCES usuario(id_usuario)
+      );
+    `);
 
-    // Cerrar conexión cuando termines
+    // ================= DETALLE_VENTA =================
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS detalle_venta (
+        id_detalle SERIAL PRIMARY KEY,
+        id_venta INT REFERENCES venta(id_venta) ON DELETE CASCADE,
+        id_producto INT REFERENCES producto(id_producto),
+        cantidad INT NOT NULL CHECK (cantidad > 0),
+        precio_unitario NUMERIC(10,2) NOT NULL
+      );
+    `);
+
+    // ================= PAGO =================
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS pago (
+        id_pago SERIAL PRIMARY KEY,
+        id_venta INT UNIQUE REFERENCES venta(id_venta) ON DELETE CASCADE,
+        fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        metodo VARCHAR(50),
+        monto NUMERIC(10,2) NOT NULL CHECK (monto >= 0)
+      );
+    `);
+
+    console.log('Base de datos creada correctamente');
     await pool.end();
 
   } catch (error) {

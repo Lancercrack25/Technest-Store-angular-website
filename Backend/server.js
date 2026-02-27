@@ -7,145 +7,216 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ==================== INICIALIZACIÓN ====================
-await initDatabase(); // crea base y tablas si no existen
-// ==================== MIDDLEWARE SIMPLIFICADO ====================
-// Simulación de middleware para admin, solo permite pasar
-function adminOnly(req, res, next) { next(); }
+await initDatabase();
 
 // ==================== USUARIOS ====================
 app.get('/usuarios', async (_, res) => {
-  const r = await pool.query('SELECT id,nombre,correo,telefono FROM usuarios');
+  const r = await pool.query('SELECT id_usuario,nombre,email,telefono,rol FROM usuario');
   res.json(r.rows);
 });
 
 app.post('/usuarios', async (req, res) => {
-  const { nombre, correo, password, telefono } = req.body;
+  const { nombre, email, password, telefono, rol } = req.body;
   const r = await pool.query(`
-    INSERT INTO usuarios (nombre, correo, password, telefono)
-    VALUES ($1,$2,$3,$4) RETURNING id,nombre,correo,telefono
-  `, [nombre, correo, password, telefono]);
+    INSERT INTO usuario (nombre,email,password,telefono,rol)
+    VALUES ($1,$2,$3,$4,$5) RETURNING *
+  `, [nombre, email, password, telefono, rol || 'cliente']);
   res.json(r.rows[0]);
 });
 
 app.put('/usuarios/:id', async (req, res) => {
-  const { nombre, correo, telefono } = req.body;
+  const { nombre, email, telefono, rol } = req.body;
   const r = await pool.query(`
-    UPDATE usuarios SET nombre=$1, correo=$2, telefono=$3
-    WHERE id=$4 RETURNING id,nombre,correo,telefono
-  `, [nombre, correo, telefono, req.params.id]);
+    UPDATE usuario SET nombre=$1,email=$2,telefono=$3,rol=$4
+    WHERE id_usuario=$5 RETURNING *
+  `, [nombre, email, telefono, rol, req.params.id]);
   res.json(r.rows[0]);
 });
 
 app.delete('/usuarios/:id', async (req, res) => {
-  await pool.query('DELETE FROM usuarios WHERE id=$1', [req.params.id]);
+  await pool.query('DELETE FROM usuario WHERE id_usuario=$1', [req.params.id]);
   res.json({ ok: true });
 });
 
-// ==================== PROVEEDORES ====================
+// ==================== CATEGORIA ====================
+app.get('/categorias', async (_, res) => {
+  const r = await pool.query('SELECT * FROM categoria ORDER BY nombre');
+  res.json(r.rows);
+});
+
+app.post('/categorias', async (req, res) => {
+  const { nombre } = req.body;
+  const r = await pool.query(`
+    INSERT INTO categoria (nombre) VALUES ($1) RETURNING *
+  `, [nombre]);
+  res.json(r.rows[0]);
+});
+
+app.put('/categorias/:id', async (req, res) => {
+  const { nombre } = req.body;
+  const r = await pool.query(`
+    UPDATE categoria SET nombre=$1
+    WHERE id_categoria=$2 RETURNING *
+  `, [nombre, req.params.id]);
+  res.json(r.rows[0]);
+});
+
+app.delete('/categorias/:id', async (req, res) => {
+  await pool.query('DELETE FROM categoria WHERE id_categoria=$1', [req.params.id]);
+  res.json({ ok: true });
+});
+
+// ==================== PROVEEDOR ====================
 app.get('/proveedores', async (_, res) => {
-  const r = await pool.query('SELECT * FROM proveedores');
+  const r = await pool.query('SELECT * FROM proveedor');
   res.json(r.rows);
 });
 
 app.post('/proveedores', async (req, res) => {
-  const { nombre, telefono, correo, empresa } = req.body;
+  const { nombre, telefono, correo } = req.body;
   const r = await pool.query(`
-    INSERT INTO proveedores (nombre, telefono, correo, empresa)
-    VALUES ($1,$2,$3,$4) RETURNING *
-  `, [nombre, telefono, correo, empresa]);
+    INSERT INTO proveedor (nombre,telefono,correo)
+    VALUES ($1,$2,$3) RETURNING *
+  `, [nombre, telefono, correo]);
   res.json(r.rows[0]);
 });
 
 app.put('/proveedores/:id', async (req, res) => {
-  const { nombre, telefono, correo, empresa } = req.body;
+  const { nombre, telefono, correo } = req.body;
   const r = await pool.query(`
-    UPDATE proveedores SET nombre=$1, telefono=$2, correo=$3, empresa=$4
-    WHERE id=$5 RETURNING *
-  `, [nombre, telefono, correo, empresa, req.params.id]);
+    UPDATE proveedor SET nombre=$1,telefono=$2,correo=$3
+    WHERE id_proveedor=$4 RETURNING *
+  `, [nombre, telefono, correo, req.params.id]);
   res.json(r.rows[0]);
 });
 
 app.delete('/proveedores/:id', async (req, res) => {
-  await pool.query('DELETE FROM proveedores WHERE id=$1', [req.params.id]);
+  await pool.query('DELETE FROM proveedor WHERE id_proveedor=$1', [req.params.id]);
   res.json({ ok: true });
 });
 
-// ==================== PRODUCTOS ====================
+// ==================== PRODUCTO ====================
 app.get('/productos', async (_, res) => {
   const r = await pool.query(`
-    SELECT p.*, pr.nombre AS proveedor
-    FROM productos p
-    LEFT JOIN proveedores pr ON p.proveedor_id = pr.id
+    SELECT p.*, c.nombre AS categoria, pr.nombre AS proveedor, i.stock
+    FROM producto p
+    LEFT JOIN categoria c ON p.id_categoria = c.id_categoria
+    LEFT JOIN proveedor pr ON p.id_proveedor = pr.id_proveedor
+    LEFT JOIN inventario i ON p.id_producto = i.id_producto
   `);
   res.json(r.rows);
 });
 
 app.post('/productos', async (req, res) => {
-  const { nombre, descripcion, precio, stock, proveedor_id } = req.body;
-  const r = await pool.query(`
-    INSERT INTO productos (nombre, descripcion, precio, stock, proveedor_id)
-    VALUES ($1,$2,$3,$4,$5) RETURNING *
-  `, [nombre, descripcion, precio, stock, proveedor_id]);
-  res.json(r.rows[0]);
+  const { sku, nombre, descripcion, precio, garantia_meses, id_categoria, id_proveedor, stock, stock_minimo, ubicacion } = req.body;
+
+  const p = await pool.query(`
+    INSERT INTO producto (sku,nombre,descripcion,precio,garantia_meses,id_categoria,id_proveedor)
+    VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *
+  `, [sku, nombre, descripcion, precio, garantia_meses, id_categoria, id_proveedor]);
+
+  await pool.query(`
+    INSERT INTO inventario (id_producto,stock,stock_minimo,ubicacion)
+    VALUES ($1,$2,$3,$4)
+  `, [p.rows[0].id_producto, stock, stock_minimo, ubicacion]);
+
+  res.json(p.rows[0]);
 });
 
 app.put('/productos/:id', async (req, res) => {
-  const { nombre, descripcion, precio, stock, proveedor_id } = req.body;
+  const { nombre, descripcion, precio, garantia_meses, id_categoria, id_proveedor } = req.body;
   const r = await pool.query(`
-    UPDATE productos SET nombre=$1, descripcion=$2, precio=$3, stock=$4, proveedor_id=$5
-    WHERE id=$6 RETURNING *
-  `, [nombre, descripcion, precio, stock, proveedor_id, req.params.id]);
+    UPDATE producto SET nombre=$1,descripcion=$2,precio=$3,garantia_meses=$4,id_categoria=$5,id_proveedor=$6
+    WHERE id_producto=$7 RETURNING *
+  `, [nombre, descripcion, precio, garantia_meses, id_categoria, id_proveedor, req.params.id]);
   res.json(r.rows[0]);
 });
 
-app.delete('/productos/:id', async (req, res) => {
-  await pool.query('DELETE FROM productos WHERE id=$1', [req.params.id]);
-  res.json({ ok: true });
+// ==================== INVENTARIO ====================
+app.put('/inventario/:id_producto', async (req, res) => {
+  const { stock, stock_minimo, ubicacion } = req.body;
+  const r = await pool.query(`
+    UPDATE inventario SET stock=$1,stock_minimo=$2,ubicacion=$3
+    WHERE id_producto=$4 RETURNING *
+  `, [stock, stock_minimo, ubicacion, req.params.id_producto]);
+  res.json(r.rows[0]);
 });
 
 // ==================== CARRITO ====================
 app.post('/carrito', async (req, res) => {
-  const { usuario_id } = req.body;
-  const r = await pool.query(
-    'INSERT INTO carrito (usuario_id) VALUES ($1) RETURNING *',
-    [usuario_id]
-  );
+  const { id_usuario } = req.body;
+  const r = await pool.query(`
+    INSERT INTO carrito (id_usuario) VALUES ($1)
+    ON CONFLICT (id_usuario) DO UPDATE SET creado_en = CURRENT_TIMESTAMP
+    RETURNING *
+  `, [id_usuario]);
   res.json(r.rows[0]);
 });
 
 app.post('/carrito/detalle', async (req, res) => {
-  const { carrito_id, producto_id, cantidad } = req.body;
+  const { id_carrito, id_producto, cantidad } = req.body;
   const r = await pool.query(`
-    INSERT INTO carrito_detalle (carrito_id, producto_id, cantidad)
+    INSERT INTO carrito_detalle (id_carrito,id_producto,cantidad)
     VALUES ($1,$2,$3) RETURNING *
-  `, [carrito_id, producto_id, cantidad]);
+  `, [id_carrito, id_producto, cantidad]);
   res.json(r.rows[0]);
 });
 
-// ==================== VENTAS ====================
+// ==================== PROCESAR VENTA ====================
 app.post('/ventas', async (req, res) => {
-  const { usuario_id, total, detalles } = req.body;
+  const client = await pool.connect();
 
-  const v = await pool.query(`
-    INSERT INTO ventas (usuario_id, total)
-    VALUES ($1,$2) RETURNING id
-  `, [usuario_id, total]);
+  try {
+    const { id_usuario, detalles, metodo_pago } = req.body;
 
-  for (const d of detalles) {
-    await pool.query(`
-      INSERT INTO detalle_venta (venta_id, producto_id, cantidad, precio)
-      VALUES ($1,$2,$3,$4)
-    `, [v.rows[0].id, d.producto_id, d.cantidad, d.precio]);
+    await client.query('BEGIN');
 
-    await pool.query(`
-      UPDATE productos SET stock = stock - $1 WHERE id = $2
-    `, [d.cantidad, d.producto_id]);
+    let total = 0;
+
+    for (const d of detalles) {
+      const stockCheck = await client.query(`
+        SELECT stock FROM inventario WHERE id_producto = $1
+      `, [d.id_producto]);
+
+      if (stockCheck.rows[0].stock < d.cantidad) {
+        throw new Error(`Stock insuficiente para producto ${d.id_producto}`);
+      }
+
+      total += d.precio * d.cantidad;
+    }
+
+    const v = await client.query(`
+      INSERT INTO venta (id_usuario,total,estado)
+      VALUES ($1,$2,'pagado') RETURNING *
+    `, [id_usuario, total]);
+
+    for (const d of detalles) {
+      await client.query(`
+        INSERT INTO detalle_venta (id_venta,id_producto,cantidad,precio_unitario)
+        VALUES ($1,$2,$3,$4)
+      `, [v.rows[0].id_venta, d.id_producto, d.cantidad, d.precio]);
+
+      await client.query(`
+        UPDATE inventario SET stock = stock - $1 WHERE id_producto = $2
+      `, [d.cantidad, d.id_producto]);
+    }
+
+    await client.query(`
+      INSERT INTO pago (id_venta,metodo,monto)
+      VALUES ($1,$2,$3)
+    `, [v.rows[0].id_venta, metodo_pago, total]);
+
+    await client.query('COMMIT');
+
+    res.json({ ok: true, venta: v.rows[0] });
+
+  } catch (error) {
+    await client.query('ROLLBACK');
+    res.status(500).json({ error: error.message });
+  } finally {
+    client.release();
   }
-
-  res.json({ ok: true, venta_id: v.rows[0].id });
 });
-
 // ==================== SERVER ====================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
