@@ -1,7 +1,7 @@
 <div class="login-wrapper">
   <h2>Technest store</h2>
   <br>
-  <form class="login-card">
+  <form class="login-card" (ngSubmit)="login()" #form="ngForm">
     <h1>Login</h1>
 
     <div class="input-box">
@@ -12,7 +12,7 @@
       <input type="password" placeholder="Contraseña" required />
     </div>
 
-    <button type="submit" class="btn-login">
+    <button type="submit" class="btn-login" [disabled]="form.invalid">
       Iniciar sesión
     </button>
 
