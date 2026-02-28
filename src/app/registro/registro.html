@@ -1,29 +1,29 @@
 <div class="login-wrapper">
-  <form class="login-card">
+  <form class="login-card" (ngSubmit)="registrar()">
     <h1>Registrate</h1>
 
     <div class="input-box">
-      <input type="text" placeholder="Nombre usuario" required />
+      <input type="text" placeholder="Nombre usuario" required [(ngModel)]="form.nombre" name="nombre"/>
     </div>
 
-     <div class="input-box">
-      <input type="email" placeholder="Correo electrónico" required />
+    <div class="input-box">
+      <input type="email" placeholder="Correo electrónico" required [(ngModel)]="form.email" name="email"/>
     </div>
 
-     <div class="input-box">
-      <input type="number" placeholder="Teléfono" min="1" required />
+    <div class="input-box">
+      <input type="number" placeholder="Teléfono" min="1" required [(ngModel)]="form.telefono" name="telefono"/>
     </div>
     
     <div class="input-box">
-      <input type="password" placeholder="Contraseña" required />
+      <input type="password" placeholder="Contraseña" required [(ngModel)]="form.password" name="password"/>
     </div>
 
     <div class="input-box">
-      <input type="password" placeholder="Confirmar contraseña" required />
+      <input type="password" placeholder="Confirmar contraseña" required [(ngModel)]="confirmPassword" name="confirmPassword"/>
     </div>
 
     <button type="submit" class="btn-login">
-      Registarse
+      Registrarse
     </button>
 
     <div class="extra-links">
