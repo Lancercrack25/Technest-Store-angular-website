@@ -1,24 +1,82 @@
-<div class="login-wrapper">
-  <h2>Technest store</h2>
-  <br>
-  <form class="login-card" (ngSubmit)="login()" #form="ngForm">
-    <h1>Login</h1>
+<main class="client-login">
+  <div class="client-card-container">
+    <div class="client-card" aria-labelledby="client-title">
 
-    <div class="input-box">
-      <input type="text" placeholder="Usuario" required />
+      <!-- Logo -->
+      <div class="logo-container" aria-hidden="true">
+        <div class="logo-box">TechNest</div>
+      </div>
+
+      <!-- Title -->
+      <header class="client-header">
+        <h1 id="client-title" class="client-title">
+          Iniciar Sesión
+        </h1>
+        <p class="client-subtitle">Accede a tu cuenta</p>
+      </header>
+
+      <!-- Form -->
+      <form class="client-form" (ngSubmit)="login()" novalidate>
+
+        <!-- Usuario -->
+        <div class="input-group">
+          <label for="nombre">Usuario</label>
+          <input
+            id="nombre"
+            name="nombre"
+            type="text"
+            placeholder="Tu usuario"
+            [(ngModel)]="nombre"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <!-- Password -->
+        <div class="input-group">
+          <label for="password">Contraseña</label>
+
+          <div class="password-wrapper">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              [(ngModel)]="password"
+              autocomplete="current-password"
+              required
+            />
+
+            <!-- Botón para mostrar/ocultar (solo UI) -->
+            <button class="toggle-password" type="button" aria-label="Mostrar contraseña">
+              <span class="eye-icon" aria-hidden="true">👁</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Options row -->
+        <div class="options-row">
+          <label class="remember-me">
+            <input type="checkbox" />
+            <span>Recuérdame</span>
+          </label>
+
+          <a class="forgot-link" routerLink="/forgot-password">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+
+        <!-- Primary action -->
+        <button class="btn-primary" type="submit">
+          Iniciar sesión
+        </button>
+
+        <!-- Secondary action -->
+        <a class="btn-secondary" routerLink="/registro">
+          Crear una cuenta
+        </a>
+
+      </form>
     </div>
-
-    <div class="input-box">
-      <input type="password" placeholder="Contraseña" required />
-    </div>
-
-    <button type="submit" class="btn-login" [disabled]="form.invalid">
-      Iniciar sesión
-    </button>
-
-    <div class="extra-links">
-      <a routerLink="/registro">¿No tienes una cuenta? Regístrate</a>
-      <a href="#">¿Olvidaste tu contraseña?</a>
-    </div>
-  </form>
-</div>
+  </div>
+</main>
