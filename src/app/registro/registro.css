@@ -1,91 +1,217 @@
-/* Centrado total */
-.login-wrapper {
-  height: 100vh;
+.client-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem;
+}
+
+/* Contenedor */
+.client-card-container {
+  width: 100%;
+  width: 460px;
+  display: grid;
+  place-items: center;
+}
+
+/* Card  */
+.client-card {
+  padding: 30px 28px;
+  border-radius: 20px;
+
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  animation: fadeUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Logo */
+.logo-container {
+  display: grid;
+  place-items: center;
+}
+
+.logo-box {
+  width: fit-content;
+  height: 52px;
+  padding: 0 12px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff2368, #ff74e3);
+  box-shadow: 0 5px 10px rgba(197, 34, 116, 0.35);
+
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Tarjeta tipo vidrio */
-.login-card {
-  width: 360px;
-  padding: 45px 35px;
-  border-radius: 20px;
-
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+/* Header */
+.client-header {
   text-align: center;
-  color: white;
+  display: grid;
+  gap: 6px;
 }
 
-/* Título */
-.login-card h1 {
-  margin-bottom: 30px;
+.client-title {
+  font-size: 22px;
   font-weight: 600;
-  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.client-subtitle {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* Form */
+.client-form {
+  display: grid;
+}
+
+/* Input group */
+.input-group {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.input-group label {
+  font-size: 13px;
+  color: #cbd5e1;
 }
 
 /* Inputs */
-.input-box {
-  margin-bottom: 20px;
-}
-
-.input-box input {
-  width: 100%;
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: none;
+.input-group input {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  background: #0f172a;
+  color: #fff;
+  font-size: 13px;
   outline: none;
-  font-size: 14px;
-
-  background: rgba(255, 255, 255, 0.25);
-  color: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.input-box input::placeholder {
-  color: rgba(255, 255, 255, 0.8);
+.input-group input:hover {
+  border-color: #334155;
 }
 
-/* Botón */
-.btn-login {
+.input-group input:focus {
+  border-color: #ffd799;
+  box-shadow: 0 0 10px rgba(196, 149, 77, 0.8);
+}
+
+/* Password wrapper */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 10px;
+  padding-right: 44px;
+}
+
+/* Toggle icon */
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  color: #94a3b8;
   font-size: 15px;
-
-  background: white;
-  color: #333;
-  transition: 0.3s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.btn-login:hover {
+.toggle-password:hover {
+  color: #cbd5e1;
+  transform: scale(1.05);
+}
+
+/* Botón principal */
+.btn-primary {
+  width: 100%;
+  padding: 11px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, #ff2368, #ff74e3);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 22px rgba(197, 34, 116, 0.35);
 }
 
-/* Links */
-.extra-links {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.18),
+      transparent);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
 }
 
-.extra-links a {
-  font-size: 13px;
+.btn-primary:hover::before {
+  transform: translateX(120%);
+}
+
+/* Botón secundario */
+.btn-secondary {
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  border-radius: 14px;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.85);
-  transition: 0.3s;
+  font-size: 13px;
+  color: #cbd5e1;
+  border: 1px solid #1e293b;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.extra-links a:hover {
-  color: white;
-  text-decoration: underline;
+.btn-secondary:hover {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .client-card {
+    padding: 28px 18px;
+    gap: 10px;
+  }
 }
