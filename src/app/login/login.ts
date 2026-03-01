@@ -49,7 +49,7 @@ export class Login {
           showConfirmButton: false
         });
 
-        // 👇 CAMBIA ESTA RUTA si quieres otro componente
+        // CAMBIA ESTA RUTA si quieres otro componente
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
@@ -72,7 +72,7 @@ export class Login {
       event.preventDefault();
 
       this.router.navigate(['/admin/login']);
-      // 👆 cambia la ruta si quieres otro componente
+      // cambia la ruta si quieres otro componente
     }
   }
 }
