@@ -1,25 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
 /* Reset básico */
+:root {
+  --color-white: #fff;
+  --color-variant-blue: #1e5eff22;
+  --color-deep-blue: #0a1a3a;
+  --color-deep-blue-dark: #0f172a;
+  --color-blue-dark: #050814;
+
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
 }
 
 /* Fondo del login */
 .login {
   height: 100vh;
-  background-image: url('https://img.freepik.com/fotos-premium/componentes-computadora-sobre-fondo-negro_160097-300.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:
+    radial-gradient(circle at top, #0a1a3ab3, #050814e6),
+    url('assets/images/background-login.webp') center / cover no-repeat;
+  color: #ffffff;
 }
 
+/* Fondo del registro */
 .registro {
   height: 100vh;
   background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240625/pngtree-top-view-of-computer-graphics-card-image_15818672.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+/* Fondo del login-admin */
+.admin-login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:
+    radial-gradient(circle at top, #0a1a3ab3, #050814e6),
+    url('assets/images/background-admin.webp') center / cover no-repeat;
+  color: #ffffff;
 }
