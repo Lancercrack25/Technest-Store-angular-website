@@ -84,12 +84,11 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Input group: grid para label + input */
+/* Input group */
 .input-group {
   display: grid;
   gap: 8px;
   margin-bottom: 20px;
-  /* border: 2px solid red; */
 }
 
 .input-group label {
