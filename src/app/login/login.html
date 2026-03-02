@@ -21,15 +21,8 @@
         <!-- Usuario -->
         <div class="input-group">
           <label for="nombre">Usuario</label>
-          <input
-            id="nombre"
-            name="nombre"
-            type="text"
-            placeholder="Tu usuario"
-            [(ngModel)]="nombre"
-            autocomplete="username"
-            required
-          />
+          <input id="nombre" name="nombre" type="text" placeholder="Tu usuario" [(ngModel)]="nombre"
+            autocomplete="username" required />
         </div>
 
         <!-- Password -->
@@ -37,15 +30,8 @@
           <label for="password">Contraseña</label>
 
           <div class="password-wrapper">
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="••••••••"
-              [(ngModel)]="password"
-              autocomplete="current-password"
-              required
-            />
+            <input id="password" name="password" type="password" placeholder="••••••••" [(ngModel)]="password"
+              autocomplete="current-password" required />
 
             <!-- Botón para mostrar/ocultar (solo UI) -->
             <button class="toggle-password" type="button" aria-label="Mostrar contraseña">
@@ -66,15 +52,13 @@
           </a>
         </div>
 
-        <!-- Primary action -->
-        <button class="btn-primary" type="submit">
-          Iniciar sesión
-        </button>
+        <div class="btn-container">
+          <!-- Primary action -->
+          <button class="btn-primary" type="submit">Iniciar sesión</button>
 
-        <!-- Secondary action -->
-        <a class="btn-secondary" routerLink="/registro">
-          Crear una cuenta
-        </a>
+          <!-- Secondary action -->
+          <button class="btn-secondary" type="button" routerLink="/registro">Crear una cuenta</button>
+        </div>
 
       </form>
     </div>
