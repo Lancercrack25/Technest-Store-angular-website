@@ -14,8 +14,7 @@
 }
 
 /* TEXTO HERO */
-
-.texto{
+section h1{
     text-align:center;
     text-transform:uppercase;
 
@@ -23,6 +22,8 @@
     font-weight:900;
 
     letter-spacing:5px;
+
+    color:white;
 
     background:linear-gradient(
         90deg,
@@ -38,6 +39,7 @@
         0 0 10px rgba(0,255,255,0.3),
         0 0 25px rgba(59,130,246,0.3);
 }
+
 .inicio-container{
     padding:80px 10%;
     background:linear-gradient(180deg,#0a0d1d,#111d38);

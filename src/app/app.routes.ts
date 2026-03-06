@@ -5,6 +5,8 @@ import { Registro } from './registro/registro';
 import { AdminLogin } from './admin-login/admin-login';
 import { AdminPanel } from './admin-panel/admin-panel';
 import { ForgotPassword } from './forgot-password/forgot-password';
+import { Navbar } from './navbar/navbar';
+import { Footer } from './footer/footer';
 
 export const routes: Routes = [
   { path: '', component: Login },
@@ -14,4 +16,6 @@ export const routes: Routes = [
   { path: 'admin/login', component: AdminLogin },
   { path: 'admin/panel', component: AdminPanel },
   { path: 'forgot-password', component: ForgotPassword },
+  { path: 'navbar', component: Navbar },
+  { path: 'footer', component: Footer },
 ];
