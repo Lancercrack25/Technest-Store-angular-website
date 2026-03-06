@@ -11,24 +11,23 @@
   color: #3aa0ff;
 }
 
+.footer-section {
+  display: flex;
+  flex-direction: column;
+    margin-left: -196px;
+}
+
 .footer-section h3 {
   margin-bottom: 10px;
-  color: white;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li {
-  margin: 6px 0;
+  color: rgb(39, 158, 212);
+  font-size: 32px;
 }
 
 .footer-section a {
   text-decoration: none;
   color: #bbb;
   transition: 0.3s;
+  font-size: 18px;
 }
 
 .footer-section a:hover {
