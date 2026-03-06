@@ -1,5 +1,5 @@
 .hero{
-    height: 600px;
+    height: 900px;
     width: 100%;
     background-image: url("../../assets/images/inicio_content.jpg");
     display:flex;
@@ -11,6 +11,7 @@
     background-repeat:no-repeat;
 
     background-attachment:fixed;
+    margin-top: 70px;
 }
 
 /* TEXTO HERO */
@@ -18,7 +19,7 @@ section h1{
     text-align:center;
     text-transform:uppercase;
 
-    font-size:95px;
+    font-size:119px;
     font-weight:900;
 
     letter-spacing:5px;
@@ -27,17 +28,18 @@ section h1{
 
     background:linear-gradient(
         90deg,
-        #00f2ff,
-        #3b82f6,
-        #8b5cf6
+        #00fff2,
+        #20188f,
+        #784ddd
     );
 
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 
     text-shadow:
-        0 0 10px rgba(0,255,255,0.3),
-        0 0 25px rgba(59,130,246,0.3);
+        0 0 10px rgba(0, 255, 255, 0.699),
+        0 0 25px rgba(19, 63, 134, 0.822);
+    margin-top: 393px;
 }
 
 .inicio-container{

@@ -4,7 +4,9 @@
 <div [ngClass]="{
   'login': router.url === '/',
   'registro': router.url === '/registro',
-  'inicio': router.url === '/inicio'
+  'inicio': router.url === '/inicio',
+  'navbar': router.url === '/navbar',
+  'footer': router.url === '/footer',
 }">
 
   <router-outlet></router-outlet>

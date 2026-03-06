@@ -81,3 +81,19 @@ body {
     url('assets/images/background-forgot-password.webp') center / cover no-repeat;
   color: #ffffff;
 }
+
+.navbar {
+  width: 100%;
+  height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+ 
+}
+
+.footer {
+  padding: 10px 0 10px 0;
+  background: linear-gradient(to bottom, #0e2453, #0a243a);
+  color: #f3f2f5; 
+}
