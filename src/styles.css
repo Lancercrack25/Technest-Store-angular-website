@@ -25,6 +25,13 @@ body {
   font-size: 16px;
 }
 
+.inicio{
+  height:97vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
 /* Fondo del login */
 .login {
   height: 100vh;
@@ -32,7 +39,7 @@ body {
   justify-content: center;
   align-items: center;
   background:
-    radial-gradient(circle at top, #0a1a3a44, #05081465),
+    radial-gradient(circle at top, #0a1a3ab3, #050814e6),
     url('assets/images/background-login.webp') center / cover no-repeat;
   color: #ffffff;
 }
@@ -59,19 +66,6 @@ body {
   background:
     radial-gradient(circle at top, #0a1a3ab3, #050814e6),
     url('assets/images/background-admin.webp') center / cover no-repeat;
-  color: #ffffff;
-}
-
-.forgot-password {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background:
-    radial-gradient(circle at 20% 10%, #e563f12e, #00000000 55%),
-    radial-gradient(circle at 80% 30%, #7538f826, #00000000 60%),
-    radial-gradient(circle at 50% 110%, #140f2ae6, #020617fa),
-    url('assets/images/background-forgot-password.webp') center / cover no-repeat;
   color: #ffffff;
 }
 

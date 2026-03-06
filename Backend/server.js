@@ -217,6 +217,37 @@ app.post('/ventas', async (req, res) => {
     client.release();
   }
 });
+
+// ==================== LOGIN ====================
+app.post('/login', async (req, res) => {
+
+  const { nombre, password } = req.body;
+
+  try {
+
+    const r = await pool.query(`
+      SELECT id_usuario, nombre, rol
+      FROM usuario
+      WHERE nombre = $1 AND password = $2
+    `, [nombre, password]);
+
+    if (r.rows.length === 0) {
+      return res.status(401).json({
+        error: 'Credenciales incorrectas'
+      });
+    }
+
+    res.json(r.rows[0]);
+
+  } catch (error) {
+
+    res.status(500).json({
+      error: 'Error en el servidor'
+    });
+
+  }
+
+});
 // ==================== SERVER ====================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

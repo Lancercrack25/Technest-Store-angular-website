@@ -19,10 +19,6 @@ export class Login {
   password = '';
 
   constructor(private http: HttpClient, private router: Router) { }
-
-  // ==========================
-  // LOGIN NORMAL
-  // ==========================
   login() {
 
     if (!this.nombre || !this.password) {
@@ -50,7 +46,7 @@ export class Login {
         });
 
         // CAMBIA ESTA RUTA si quieres otro componente
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/inicio']);
       },
       error: (err) => {
         Swal.fire({
