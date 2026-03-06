@@ -69,3 +69,15 @@ body {
   color: #ffffff;
 }
 
+.forgot-password {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:
+    radial-gradient(circle at 20% 10%, #e563f12e, #00000000 55%),
+    radial-gradient(circle at 80% 30%, #7538f826, #00000000 60%),
+    radial-gradient(circle at 50% 110%, #140f2ae6, #020617fa),
+    url('assets/images/background-forgot-password.webp') center / cover no-repeat;
+  color: #ffffff;
+}
