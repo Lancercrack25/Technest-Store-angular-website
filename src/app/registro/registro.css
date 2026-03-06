@@ -52,8 +52,8 @@
   height: 52px;
   padding: 0 12px;
   border-radius: 14px;
-  background: linear-gradient(135deg, #ff2368, #ff74e3);
-  box-shadow: 0 5px 10px rgba(197, 34, 116, 0.35);
+  background: linear-gradient(135deg, #e22222, #ac1212, #a50606, #8d0c03);
+  box-shadow: 0 5px 10px rgba(44, 43, 43, 0.747);
 
   font-weight: 700;
   font-size: 20px;
@@ -161,7 +161,7 @@
   font-size: 14px;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(90deg, #ff2368, #ff74e3);
+  background: linear-gradient(90deg, #db2020, #b81111,#bd2a10, #d1350e);
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 

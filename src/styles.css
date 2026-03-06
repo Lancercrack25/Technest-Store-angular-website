@@ -32,7 +32,7 @@ body {
   justify-content: center;
   align-items: center;
   background:
-    radial-gradient(circle at top, #0a1a3ab3, #050814e6),
+    radial-gradient(circle at top, #0a1a3a44, #05081465),
     url('assets/images/background-login.webp') center / cover no-repeat;
   color: #ffffff;
 }
@@ -45,8 +45,8 @@ body {
   overflow: hidden;
   align-items: center;
   background:
-    radial-gradient(circle at top, #0a1a3ab3, #050814e6),
-    url('assets/images/background-login.webp') center / cover no-repeat;
+    radial-gradient(circle at top, #0a1a3a11, #0508140e),
+    url('assets/images/pc_background.jpg') center / cover no-repeat;
   color: #ffffff;
 }
 
@@ -74,3 +74,4 @@ body {
     url('assets/images/background-forgot-password.webp') center / cover no-repeat;
   color: #ffffff;
 }
+
