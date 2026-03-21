@@ -36,7 +36,7 @@ export class Login {
     }).subscribe({
       next: (res) => {
 
-        localStorage.setItem('usuario', JSON.stringify(res));
+        localStorage.setItem('cliente', JSON.stringify(res));
 
         Swal.fire({
           icon: 'success',
