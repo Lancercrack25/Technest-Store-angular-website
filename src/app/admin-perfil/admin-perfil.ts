@@ -1,0 +1,12 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-admin-perfil',
+  standalone: true,
+  imports: [],
+  templateUrl: './admin-perfil.html',
+  styleUrl: './admin-perfil.css',
+})
+export class AdminPerfil {
+
+}
