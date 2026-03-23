@@ -1,6 +1,4 @@
 # Technest Store website
-
-# Technest Store website
 <h2 style="font-size: 36px; margin-top: 40px;">Instalación</h2>
 
 <strong>Para poder instalar correctamente este proyecto debes de tener instalado node.js, npm y angular</strong>
