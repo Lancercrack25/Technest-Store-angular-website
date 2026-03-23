@@ -1,1 +1,41 @@
-<p>cliente-perfil works!</p>
+<div class="profile-container" *ngIf="user">
+
+  <div class="profile-card">
+
+    <div class="profile-image">
+      <img [src]="userImage || 'assets/default-user.png'" />
+
+      <label class="upload-btn">
+        Cambiar foto
+        <input type="file" (change)="onImageSelected($event)" hidden>
+      </label>
+    </div>
+
+    <form class="profile-form" (ngSubmit)="guardarCambios()">
+
+      <h2>Mi Perfil</h2>
+
+      <div class="input-group">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="user.nombre" name="nombre">
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="user.email" name="email">
+      </div>
+
+      <div class="input-group">
+        <label>Teléfono</label>
+        <input type="text" [(ngModel)]="user.telefono" name="telefono">
+      </div>
+
+      <button type="submit" class="btn-save">
+        Guardar cambios
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

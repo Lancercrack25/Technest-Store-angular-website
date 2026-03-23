@@ -1,0 +1,106 @@
+.profile-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding-top:100px;
+
+    background:#020617;
+}
+
+/* CARD */
+
+.profile-card{
+    display:flex;
+    gap:40px;
+
+    background:rgba(15,23,42,0.85);
+    backdrop-filter:blur(15px);
+
+    padding:40px;
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,0.05);
+
+    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* FOTO */
+
+.profile-image{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+}
+
+.profile-image img{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+
+    border:3px solid #22d3ee;
+}
+
+.upload-btn{
+    font-size:14px;
+    color:#22d3ee;
+    cursor:pointer;
+}
+
+/* FORM */
+
+.profile-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    width:300px;
+}
+
+.profile-form h2{
+    color:white;
+}
+
+/* INPUTS */
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.input-group label{
+    font-size:13px;
+    color:#94a3b8;
+}
+
+.input-group input{
+    padding:10px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.1);
+
+    background:#020617;
+    color:white;
+}
+
+/* BOTÓN */
+
+.btn-save{
+    margin-top:10px;
+    padding:12px;
+
+    border:none;
+    border-radius:10px;
+
+    background:linear-gradient(90deg,#22d3ee,#e01178);
+    color:white;
+
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn-save:hover{
+    transform:scale(1.05);
+}

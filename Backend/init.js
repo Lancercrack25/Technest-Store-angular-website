@@ -35,6 +35,7 @@ export async function initDatabase() {
         password VARCHAR(255) NOT NULL,
         telefono VARCHAR(15),
         rol VARCHAR(20),
+        imagen TEXT,
         creado_en TIMESTAMP
       );
     `);

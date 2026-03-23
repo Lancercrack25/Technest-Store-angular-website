@@ -42,7 +42,7 @@ export class Registro {
     }
 
     // 3. Enviar al backend
-    this.http.post(`${this.api}/clientes`, {
+    this.http.post(`${this.api}/cliente`, {
       nombre,
       email,
       telefono,

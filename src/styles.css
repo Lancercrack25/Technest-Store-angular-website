@@ -97,3 +97,11 @@ body {
   background: linear-gradient(to bottom, #05122c, #010d18);
   color: #f3f2f5; 
 }
+
+.cliente-perfil {
+  justify-content: center;
+  align-items: center;
+  background:
+    radial-gradient(circle at top, #0a1a3ab3, #050814e6);
+  color: #ffffff;
+}

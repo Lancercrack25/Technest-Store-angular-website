@@ -10,12 +10,12 @@ app.use(express.json());
 await initDatabase();
 
 // ==================== CLIENTES ====================
-app.get('/clientes', async (_, res) => {
+app.get('/cliente', async (_, res) => {
   const r = await pool.query('SELECT id_cliente,nombre,email,telefono,rol FROM cliente');
   res.json(r.rows);
 });
 
-app.post('/clientes', async (req, res) => {
+app.post('/cliente', async (req, res) => {
   const { nombre, email, password, telefono, rol } = req.body;
   const r = await pool.query(`
     INSERT INTO cliente (nombre,email,password,telefono,rol,creado_en)
@@ -24,7 +24,7 @@ app.post('/clientes', async (req, res) => {
   res.json(r.rows[0]);
 });
 
-app.put('/clientes/:id', async (req, res) => {
+app.put('/cliente/:id', async (req, res) => {
   const { nombre, email, telefono, rol } = req.body;
   const r = await pool.query(`
     UPDATE cliente SET nombre=$1,email=$2,telefono=$3,rol=$4
@@ -33,10 +33,35 @@ app.put('/clientes/:id', async (req, res) => {
   res.json(r.rows[0]);
 });
 
-app.delete('/clientes/:id', async (req, res) => {
+app.delete('/cliente/:id', async (req, res) => {
   await pool.query('DELETE FROM cliente WHERE id_cliente=$1', [req.params.id]);
   res.json({ ok: true });
 });
+
+// GET PERFIL (ESTE TE FALTABA O NO LO MOSTRASTE BIEN)
+app.get('/cliente/perfil/:id', async (req, res) => {
+  const r = await pool.query(
+    'SELECT id_cliente, nombre, email, telefono, rol, imagen FROM cliente WHERE id_cliente=$1',
+    [req.params.id]
+  );
+
+  res.json(r.rows[0]);
+});
+
+// UPDATE IMAGEN
+app.put('/cliente/imagen/:id', async (req, res) => {
+  const { imagen } = req.body;
+
+  const r = await pool.query(`
+    UPDATE cliente
+    SET imagen=$1
+    WHERE id_cliente=$2
+    RETURNING *
+  `, [imagen, req.params.id]);
+
+  res.json(r.rows[0]);
+});
+
 
 // ==================== CATEGORIAS ====================
 app.get('/categorias', async (_, res) => {
@@ -215,10 +240,10 @@ app.post('/login', async (req, res) => {
   try {
 
     const r = await pool.query(`
-      SELECT id_cliente, nombre, rol
+      SELECT id_cliente, nombre, password, email, telefono, rol, imagen
       FROM cliente
-      WHERE nombre = $1 AND password = $2
-    `, [nombre, password]);
+      WHERE nombre = $1
+    `, [nombre]);
 
     if (r.rows.length === 0) {
       return res.status(401).json({
@@ -226,17 +251,26 @@ app.post('/login', async (req, res) => {
       });
     }
 
-    res.json(r.rows[0]);
+    const user = r.rows[0];
+
+    // 🔥 validar password manualmente
+    if (user.password !== password) {
+      return res.status(401).json({
+        error: 'Credenciales incorrectas'
+      });
+    }
+
+    // 🔥 eliminar password antes de enviar
+    delete user.password;
+
+    res.json(user);
 
   } catch (error) {
-
     res.status(500).json({
       error: 'Error en el servidor'
     });
-
   }
 });
-
 // ==================== SERVER ====================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

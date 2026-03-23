@@ -8,6 +8,19 @@
         <li><a routerLink="/productos">Productos</a></li>
         <li><a routerLink="/carrito">Carrito</a></li>
         <li><a routerLink="/recomendador">Recomendador Piezas</a></li>
+        <li><a routerLink="/pedidos"> Mis Pedidos</a></li>
     </ul>
 
+    <div class="user-menu">
+        <img 
+            [src]="userImage" 
+            class="avatar"
+            (click)="toggleMenu()"
+        />
+
+        <ul *ngIf="menuOpen" class="dropdown">
+            <li><a (click)="goToPerfil()" class="texts">Mi perfil</a></li>
+            <li (click)="logout()" class="texts">Salir</li>
+        </ul>
+    </div>
 </nav>

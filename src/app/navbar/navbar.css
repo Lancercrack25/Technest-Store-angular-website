@@ -1,3 +1,4 @@
+/* NAVBAR */
 .navbar{
     width:100%;
     height:80px;
@@ -10,7 +11,7 @@
     justify-content:space-between;
     align-items:center;
 
-    padding:0 8%;
+    padding:0 4%;
 
     background:rgba(2, 6, 23, 0.623);
     backdrop-filter:blur(10px);
@@ -20,6 +21,8 @@
     z-index:1000;
 }
 
+/* LOGO */
+
 .logo{
     font-size:26px;
     font-weight:bold;
@@ -27,7 +30,6 @@
     -webkit-background-clip:text;
     color:transparent;
     margin-left: -53px;
-    
 }
 
 /* MENU */
@@ -36,6 +38,9 @@
     list-style:none;
     display:flex;
     gap:35px;
+
+    margin-left: auto;
+    margin-right: 19px;
 }
 
 .menu a{
@@ -54,7 +59,7 @@
     color: rgb(58, 202, 207)
 }
 
-/* Linea animada */
+/* Línea animada */
 
 .menu a::after{
     content:"";
@@ -71,4 +76,110 @@
 
 .menu a:hover::after{
     width:100%;
+}
+
+.user-menu{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* AVATAR */
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    object-fit:cover;
+    cursor:pointer;
+
+    border:2px solid rgba(255,255,255,0.2);
+    transition:0.3s;
+}
+
+.avatar:hover{
+    transform: scale(1.08);
+    border-color:#22d3ee;
+    box-shadow:0 0 12px rgba(34,211,238,0.6);
+}
+
+/* DROPDOWN */
+
+.dropdown{
+    position:absolute;
+    top:50px; /* 🔥 más pegado al avatar */
+    right:0;
+
+    background:rgba(15, 23, 42, 0.98);
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px;
+
+    list-style:none;
+    padding:6px 0;
+    min-width:160px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.5);
+
+    animation: fadeIn 0.18s ease;
+}
+
+/* 🔥 FLECHITA (clave para que no se vea raro) */
+.dropdown::before{
+    content:"";
+    position:absolute;
+    top:-6px;
+    right:14px;
+
+    width:10px;
+    height:10px;
+
+    background:rgba(15, 23, 42, 0.98);
+    transform:rotate(45deg);
+
+    border-left:1px solid rgba(255,255,255,0.08);
+    border-top:1px solid rgba(255,255,255,0.08);
+}
+
+/* ITEMS */
+
+.dropdown li{
+    padding:10px 16px;
+    color:#e2e8f0;
+    font-size:14px;
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+/* HOVER más elegante */
+
+.dropdown li:hover{
+    background:rgba(34,211,238,0.12);
+    color:#22d3ee;
+}
+
+/* separador */
+.dropdown li + li{
+    border-top:1px solid rgba(255,255,255,0.05);
+}
+
+/* ANIMACIÓN */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(-8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.texts{
+    text-decoration: none;
+    color: white;
 }
