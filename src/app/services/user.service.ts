@@ -24,5 +24,5 @@ export class UserService {
     localStorage.clear();
   }
 }
-
-//esto es solo para lo del usuario y su perfil 
+//servicio global de angular para manejar el estado del usuario en toda la aplicación, especialmente útil para el perfil del cliente
+//no modifica nada en el backend, solo es para manejar el estado del usuario en el frontend y sincronizarlo con el backend cuando se cargue el perfil o se actualicen los datos
