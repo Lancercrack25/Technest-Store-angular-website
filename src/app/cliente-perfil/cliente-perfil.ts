@@ -39,7 +39,7 @@ export class ClientePerfil {
       .subscribe((res: any) => {
 
         this.user = res;
-        this.userImage = res.imagen || 'assets/default-user.png';
+        this.userImage = res.imagen;
 
         // sincronizar global
         this.userService.setUser(res);
