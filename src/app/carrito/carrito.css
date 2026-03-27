@@ -1,0 +1,146 @@
+.carrito-wrapper {
+  background-color: #0b0914; 
+  color: white; 
+  padding: 40px; 
+  min-height: 100vh;
+}
+
+.carrito-container {
+  max-width: 900px; 
+  margin: 0 auto; 
+  background: rgba(25, 20, 40, 0.8); 
+  padding: 30px; 
+  border-radius: 15px; 
+  border-top: 3px solid #00b9b9; 
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.btn-regresar{
+  background: transparent; 
+  color: #00b9b9; 
+  border: 1px solid #00b9b9; 
+  padding: 8px 15px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  margin-bottom: 20px; 
+  font-weight: bold;
+}
+.btn-regresar:hover {
+  background-color: #000000;
+  box-shadow: 0 0 5px #00ffff;
+}
+
+.carrito-titulo {
+  color: #ff00ff; 
+  text-align: center; 
+  text-shadow: 0 0 10px #ff00ff; 
+  border-bottom: 1px solid #333; 
+  padding-bottom: 15px;
+}
+
+.carrito-vacio {
+  margin-top: 30px; 
+  text-align: center;
+}
+
+.texto-vacio-principal {
+  font-size: 1.3rem; 
+  color: #ccc;
+}
+
+.texto-vacio-secundario {
+  font-size: 1rem; 
+  color: #888;
+}
+
+.carrito-lleno {
+  margin-top: 20px;
+}
+
+.lista-items {
+  list-style: none; 
+  padding: 0;
+}
+
+.item-fila {
+  border-bottom: 1px solid #333; 
+  padding: 15px 0; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.item-nombre {
+  font-size: 1.2rem; 
+  color: #00b9b9;
+}
+
+.item-detalles {
+  margin: 5px 0 0 0; 
+  color: #aaa;
+}
+
+.item-subtotal {
+  font-size: 1.3rem; 
+  font-weight: bold; 
+  color: white;
+}
+
+.carrito-footer {
+  margin-top: 30px; 
+  text-align: right;
+}
+
+.carrito-total {
+  color: #ff00ff;  
+  text-shadow: 0 0 10px #ff00ff; 
+  padding-bottom: 15px;
+}
+
+
+/* Payment */
+.btn-pagar{
+  background: transparent; 
+  color: #00b9b9; 
+  border: 1px solid #00b9b9; 
+  padding: 8px 15px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  margin-bottom: 20px; 
+  font-weight: bold;
+}
+
+.btn-pagar:hover {
+  background-color: #000000;
+  box-shadow: 0 0 5px #00ffff;
+}
+
+.mensaje-exito {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(0, 255, 128, 0.1);
+  border: 1px solid #00ff80;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 128, 0.2);
+  animation: aparecer 0.5s ease-in-out;
+}
+
+.exito-titulo {
+  color: #00ff80;
+  font-size: 2rem;
+  text-shadow: 0 0 10px #00ff80;
+  margin-bottom: 15px;
+}
+
+.exito-texto {
+  color: white;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+/* Animación suave para cuando aparezca el mensaje */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

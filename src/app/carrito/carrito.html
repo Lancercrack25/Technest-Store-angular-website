@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="carrito.css"> 
+  
+<div class="carrito-wrapper">
+  <div class="carrito-container">
+    
+    <button *ngIf="!pagoExitoso" (click)="regresar()" class="btn-regresar">
+      ← Regresar
+    </button>
+    
+    <h2 class="carrito-titulo">
+      Mi Carrito de Compras 🛒
+    </h2>
+
+    <div *ngIf="pagoExitoso" class="mensaje-exito">
+      <h3 class="exito-titulo">Seleccione método de pago. </h3>
+      <p class="exito-texto">
+        Paypal... <br> TDC ... <br>
+      </p>
+      <button (click)="reiniciarCarrito()" class="btn-pagar" style="margin-top: 20px;">
+        Armar otra PC
+      </button>
+    </div>
+
+    <div *ngIf="!pagoExitoso">
+
+      <div *ngIf="false" class="carrito-vacio">
+        <p class="texto-vacio-principal">
+          Tu carrito está vacío.
+        </p>
+        <p class="texto-vacio-secundario">
+          Escoge tus productos en la "sección de Productos" para armar tu carrito...
+        </p>
+      </div>
+
+      <div *ngIf="true" class="carrito-lleno">
+        
+        <ul class="lista-items">
+          <li *ngFor="let item of itemsCarrito" class="item-fila">
+            <div>
+              <strong class="item-nombre">
+                {{ item.nombre }}
+              </strong>
+              <p class="item-detalles">
+                Cantidad: {{ item.cantidad }} | Precio: ${{ item.precio }}
+              </p>
+            </div>
+            <div class="item-subtotal">
+              ${{ item.subtotal }}
+            </div>
+          </li>
+        </ul>
+        
+        <div class="carrito-footer">
+          <h3 class="carrito-total">
+            Total: ${{ total }} mxn
+          </h3>
+          <button class="btn-pagar" (click)="simularPago()"> Pagar
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
