@@ -9,7 +9,29 @@ app.use(express.json());
 
 await initDatabase();
 
+//esto mantiene el servidor activo y evita que solo se active cuando se hace alguna solicitud, ya se mantiene activo hasta que se requiera hacer control + c en la terminal del backend
+setInterval(() => {
+  pool.query('SELECT 1').catch(() => {}); //esto es solo para mantener la conexión viva, no hace nada realmente, pero evita que el servidor se "duerma" en plataformas como Heroku o Railway
+}, 30000);
+
 // ==================== CLIENTES ====================
+
+app.get('/cliente/perfil/:id', async (req, res) => {
+  const r = await pool.query(
+    'SELECT id_cliente, nombre, email, telefono, rol, imagen FROM cliente WHERE id_cliente=$1',
+    [req.params.id]
+  );
+  res.json(r.rows[0]);
+});
+
+app.put('/cliente/imagen/:id', async (req, res) => {
+  const { imagen } = req.body;
+  const r = await pool.query(`
+    UPDATE cliente SET imagen=$1 WHERE id_cliente=$2 RETURNING *
+  `, [imagen, req.params.id]);
+  res.json(r.rows[0]);
+});
+
 app.get('/cliente', async (_, res) => {
   const r = await pool.query('SELECT id_cliente,nombre,email,telefono,rol FROM cliente');
   res.json(r.rows);
@@ -37,31 +59,6 @@ app.delete('/cliente/:id', async (req, res) => {
   await pool.query('DELETE FROM cliente WHERE id_cliente=$1', [req.params.id]);
   res.json({ ok: true });
 });
-
-// GET PERFIL (ESTE TE FALTABA O NO LO MOSTRASTE BIEN)
-app.get('/cliente/perfil/:id', async (req, res) => {
-  const r = await pool.query(
-    'SELECT id_cliente, nombre, email, telefono, rol, imagen FROM cliente WHERE id_cliente=$1',
-    [req.params.id]
-  );
-
-  res.json(r.rows[0]);
-});
-
-// UPDATE IMAGEN
-app.put('/cliente/imagen/:id', async (req, res) => {
-  const { imagen } = req.body;
-
-  const r = await pool.query(`
-    UPDATE cliente
-    SET imagen=$1
-    WHERE id_cliente=$2
-    RETURNING *
-  `, [imagen, req.params.id]);
-
-  res.json(r.rows[0]);
-});
-
 
 // ==================== CATEGORIAS ====================
 app.get('/categorias', async (_, res) => {

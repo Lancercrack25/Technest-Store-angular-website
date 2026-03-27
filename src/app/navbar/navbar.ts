@@ -13,7 +13,7 @@ import { UserService } from '../services/user.service';
 export class Navbar implements OnInit {
 
   menuOpen = false;
-  userImage: string = 'assets/default-user.png';
+  userImage: string = '';
   userName: string = '';
 
   constructor(
@@ -22,18 +22,22 @@ export class Navbar implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  ngOnInit() {
-
-    if (isPlatformBrowser(this.platformId)) {
-
-      this.userService.user$.subscribe(user => {
-        if (user) {
-          this.userName = user.nombre;
-          this.userImage = user.imagen || 'assets/default-user.png';
-        }
-      });
+ ngOnInit() {
+  // BehaviorSubject emite el valor actual inmediatamente al suscribirse
+  this.userService.user$.subscribe(user => {
+    if (user) {
+      this.userName = user.nombre;
+      this.userImage = user.imagen || '';
+    } else {
+      // fallback: intentar leer directo de localStorage
+      const local = this.userService.getUser();
+      if (local) {
+        this.userName = local.nombre;
+        this.userImage = local.imagen || '';
+      }
     }
-  }
+  });
+}
 
   goToPerfil() {
     const user = this.userService.getUser();

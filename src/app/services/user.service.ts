@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserService {
 
-  private userSubject = new BehaviorSubject<any>(null);
+  private userSubject = new BehaviorSubject<any>(this.getUser()); // ← carga al arrancar
   user$ = this.userSubject.asObservable();
 
   setUser(user: any) {
