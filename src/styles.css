@@ -105,3 +105,16 @@ body {
     radial-gradient(circle at top, #0a1a3ab3, #050814e6);
   color: #ffffff;
 }
+
+.carrito {
+   min-height: 100vh; 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a0a1a;
+  background-image: 
+    linear-gradient(rgba(0,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,255,0.1) 1px, transparent 1px);
+  background-size: 90px 90px;
+}

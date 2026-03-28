@@ -1,18 +1,13 @@
-.carrito-wrapper {
-  background-color: #0b0914; 
-  color: white; 
-  padding: 40px; 
-  min-height: 100vh;
-}
 
 .carrito-container {
-  max-width: 900px; 
+  width: 670px; 
   margin: 0 auto; 
   background: rgba(25, 20, 40, 0.8); 
   padding: 30px; 
   border-radius: 15px; 
   border-top: 3px solid #00b9b9; 
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  margin-top: -390px;
 }
 
 .btn-regresar{

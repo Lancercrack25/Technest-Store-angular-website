@@ -10,6 +10,9 @@ import { Footer } from './footer/footer';
 import { AdminPerfil } from './admin-perfil/admin-perfil';
 import { ClientePerfil} from './cliente-perfil/cliente-perfil';
 import { Carrito  } from './carrito/carrito';
+import { Productos } from './productos/productos';
+import { Recomendador } from './recomendador/recomendador';
+import { Pedidos } from './pedidos/pedidos';
 
 export const routes: Routes = [
   { path: '', component: Login },
@@ -23,5 +26,8 @@ export const routes: Routes = [
   { path: 'footer', component: Footer },
   { path: 'admin/perfil', component: AdminPerfil },
   { path: 'cliente/perfil/:id', component: ClientePerfil },
-  { path: 'carrito', component: Carrito}
+  { path: 'carrito', component: Carrito},
+  { path: 'productos', component: Productos},
+  { path: 'recomendador', component: Recomendador},
+  { path: 'pedidos', component: Pedidos}
 ];
