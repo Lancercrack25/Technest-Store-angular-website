@@ -16,7 +16,7 @@ export class Carrito implements OnInit {
   
   idClientePrueba: number = 1; 
 
-  // Inyectamos Location en el constructor
+  // constructor
   constructor(
     private carritoService: CarritoService,
     private location: Location 
@@ -43,7 +43,7 @@ export class Carrito implements OnInit {
     this.location.back();
   }
 
-    simularPago() {
+  simularPago() {
     this.pagoExitoso = true;
   }
 

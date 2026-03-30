@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="carrito.css"> 
-  
+<link rel="stylesheet" href="carrito.css">
+
 <div class="carrito-wrapper">
   <div class="carrito-container">
     
@@ -7,23 +7,46 @@
       ← Regresar
     </button>
     
-    <h2 class="carrito-titulo">
-      Mi Carrito de Compras 🛒
-    </h2>
+    <h2 class="carrito-titulo"> 
+      Mi Carrito de Compras 🛒 </h2>
 
-    <div *ngIf="pagoExitoso" class="mensaje-exito">
-      <h3 class="exito-titulo">Seleccione método de pago. </h3>
-      <p class="exito-texto">
-        Paypal... <br> TDC ... <br>
-      </p>
-      <button (click)="reiniciarCarrito()" class="btn-pagar" style="margin-top: 20px;">
-        Armar otra PC
+    <div *ngIf="pagoExitoso" class="mensaje-exito"> 
+    <button (click)="regresar()" class="btn-regresar">
+      ← Regresar
+    </button>
+      <h3 class="exito-titulo">Ingrese método de pago 💳 </h3>
+        
+      <div class="formulario-pago">
+        <div class="input-grupo">
+          <label>Nombre en la tarjeta</label>
+          <input type="text" placeholder="Nombre de la cuenta" class="input-pago" maxlength="30">
+        </div>
+        
+        <div class="input-grupo">
+          <label>Número de Tarjeta</label>
+          <input type="text" placeholder="0000 0000 0000 0000" class="input-pago" maxlength="16">
+        </div>
+        
+        <div class="input-fila">
+          <div class="input-grupo mitad">
+            <label>Vencimiento</label>
+            <input type="text" placeholder="MM/AA" class="input-pago" maxlength="4">
+          </div>
+          <div class="input-grupo mitad">
+            <label>CVV / NIV</label>
+            <input type="password" placeholder="***" class="input-pago" maxlength="3">
+          </div>
+        </div>
+      </div>
+
+      <button (click)="reiniciarCarrito()" class="btn-confirmar-pago" style="margin-top: 20px;">
+        Confirmar Pago
       </button>
     </div>
 
     <div *ngIf="!pagoExitoso">
 
-      <div *ngIf="false" class="carrito-vacio">
+      <div *ngIf="itemsCarrito.length === 0" class="carrito-vacio">
         <p class="texto-vacio-principal">
           Tu carrito está vacío.
         </p>
@@ -32,8 +55,7 @@
         </p>
       </div>
 
-      <div *ngIf="true" class="carrito-lleno">
-        
+      <div *ngIf="itemsCarrito.length > 0" class="carrito-lleno">
         <ul class="lista-items">
           <li *ngFor="let item of itemsCarrito" class="item-fila">
             <div>
@@ -49,16 +71,17 @@
             </div>
           </li>
         </ul>
-        
-        <div class="carrito-footer">
-          <h3 class="carrito-total">
-            Total: ${{ total }} mxn
-          </h3>
-          <button class="btn-pagar" (click)="simularPago()"> Pagar
-          </button>
-        </div>
-
       </div>
+
+      <div class="carrito-footer">
+        <h3 class="carrito-total">
+          Total: ${{ total }} mxn
+        </h3>
+        <button class="btn-pagar" (click)="simularPago()"> 
+          Pagar
+        </button>
+      </div>
+
     </div>
 
   </div>
