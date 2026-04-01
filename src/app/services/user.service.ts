@@ -53,3 +53,5 @@ export class CarritoService {
     return this.http.post(`${this.apiUrl}/agregar`, body);
   }
 }
+
+//en este archivo se podran manejar los services de diferentes componentes
