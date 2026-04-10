@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -16,6 +17,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "polyfills": [
+    "zone.js"
+  ],
+  "outputPath": "dist/technest-store-pro",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
