@@ -23,11 +23,15 @@
 body {
   font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   font-size: 16px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .inicio{
-  height:100vh;
-  display:flex;
+  height:110vh;
+  width: 100%;
   justify-content:center;
   align-items:center;
 }
