@@ -12,7 +12,7 @@ import { ClientePerfil} from './cliente-perfil/cliente-perfil';
 import { Carrito  } from './carrito/carrito';
 import { Productos } from './productos/productos';
 import { Recomendador } from './recomendador/recomendador';
-import { Pedidos } from './pedidos/pedidos';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { Ventas } from './ventas/ventas';
 import { RegistroProductos } from './registro-productos/registro-productos';
 import { RegistroProvedores } from './registro-provedores/registro-provedores';
@@ -44,7 +44,7 @@ export const routes: Routes = [
   { path: 'carrito', component: Carrito},
   { path: 'productos', component: Productos},
   { path: 'recomendador', component: Recomendador},
-  { path: 'pedidos', component: Pedidos},
+  { path: 'pedidos', component: PedidosComponent },
   { path: 'ventas', component: Ventas},
   { path: 'registro/productos', component: RegistroProductos},
   { path: 'registro/provedores', component: RegistroProvedores},
