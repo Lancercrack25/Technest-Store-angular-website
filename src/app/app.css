@@ -1,0 +1,148 @@
+:host {
+  --primary-red: #ff0000;
+  --deep-black: #050505;
+  --dark-gray: #121212;
+  --text-gray: #808080;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.tech-container {
+  min-height: 100vh;
+  background-color: var(--deep-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 20px;
+}
+
+/* Header Estilo Industrial */
+.tech-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 5px;
+  margin: 0;
+}
+
+.logo-text span {
+  color: var(--primary-red);
+}
+
+.scan-line {
+  width: 50px;
+  height: 2px;
+  background: var(--primary-red);
+  margin: 10px auto;
+}
+
+/* Tarjeta Minimalista */
+.tech-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--dark-gray);
+  border-left: 3px solid var(--primary-red);
+  padding: 40px;
+  box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
+}
+
+h2 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.status-text {
+  font-size: 0.7rem;
+  color: var(--primary-red);
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+/* Formulario Limpio */
+.field {
+  margin-bottom: 25px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text-gray);
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.dark-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #333;
+  padding: 8px 0;
+  color: white;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.dark-input:focus {
+  border-bottom-color: var(--primary-red);
+}
+
+/* Botón Sólido */
+.action-button {
+  width: 100%;
+  background: var(--primary-red);
+  color: white;
+  border: none;
+  padding: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  margin-top: 10px;
+}
+
+.action-button:hover {
+  opacity: 0.8;
+}
+
+.result-area {
+  margin-top: 30px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.divider {
+  height: 1px;
+  background: #333;
+  margin-bottom: 20px;
+}
+
+.loading-text {
+  color: var(--primary-red);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-align: center;
+  animation: blink 1s infinite;
+}
+
+.ai-response h3 {
+  color: var(--primary-red);
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.ai-response p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #ccc;
+  border-left: 2px solid #333;
+  padding-left: 15px;
+}
+
+@keyframes blink { 50% { opacity: 0.3; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
