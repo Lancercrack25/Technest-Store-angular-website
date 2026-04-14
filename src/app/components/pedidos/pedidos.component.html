@@ -1,0 +1,38 @@
+<div class="pedidos-container">
+  <h2 class="title">MIS PEDIDOS <span class="accent">_</span></h2>
+  
+  <div class="table-wrapper">
+    <table class="stealth-table">
+      <thead>
+        <tr>
+          <th>ID ORDEN</th>
+          <th>FECHA</th>
+          <th>TOTAL</th>
+          <th>ESTADO</th>
+          <th>ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pedido of pedidos" [ngClass]="{'row-cancelled': pedido.estado === 'Cancelado'}">
+          <td class="order-id">{{ pedido.id }}</td>
+          <td>{{ pedido.fecha }}</td>
+          <td>${{ pedido.total | number:'1.2-2' }}</td>
+          <td>
+            <span class="status-badge" [attr.data-status]="pedido.estado">
+              {{ pedido.estado }}
+            </span>
+          </td>
+          <td>
+            <button 
+              *ngIf="pedido.estado === 'Pendiente'" 
+              class="btn-cancel" 
+              (click)="cancelarPedido(pedido.id)">
+              CANCELAR
+            </button>
+            <span *ngIf="pedido.estado !== 'Pendiente'" class="no-action">-</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+.pedidos-container {
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  padding: 2rem;
+  min-height: 80vh;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.title {
+  color: #fff;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  margin-bottom: 2rem;
+  border-left: 4px solid #ff0000;
+  padding-left: 15px;
+}
+
+.accent {
+  color: #ff0000;
+  animation: blink 1s infinite;
+}
+
+.table-wrapper {
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stealth-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.stealth-table th {
+  background-color: #1a1a1a;
+  color: #ff0000;
+  padding: 15px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #333;
+}
+
+.stealth-table td {
+  padding: 15px;
+  border-bottom: 1px solid #222;
+}
+
+.order-id {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.row-cancelled {
+  opacity: 0.5;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.status-badge[data-status="Pendiente"] { background: #ffaa0033; color: #ffaa00; border: 1px solid #ffaa00; }
+.status-badge[data-status="Enviado"] { background: #00ffaa33; color: #00ffaa; border: 1px solid #00ffaa; }
+.status-badge[data-status="Cancelado"] { background: #ff000033; color: #ff0000; border: 1px solid #ff0000; }
+
+.btn-cancel {
+  background: transparent;
+  color: #ff0000;
+  border: 1px solid #ff0000;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.7rem;
+}
+
+.btn-cancel:hover {
+  background: #ff0000;
+  color: #fff;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
