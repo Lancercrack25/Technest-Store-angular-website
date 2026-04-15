@@ -1,0 +1,144 @@
+/* HEADER */
+
+.panel-header {
+    text-align: center;
+    margin-bottom: 60px;
+    width: 100%;
+}
+
+.panel-logo {
+    font-size: 42px;
+    font-weight: 900;
+    background: linear-gradient(90deg, #22d3ee, #e01178);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.panel-logo span {
+    font-weight: 400;
+    font-size: 32px;
+}
+
+.panel-subtitle {
+    color: #e7e9eb;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* GRID */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* CARD */
+
+.card {
+    background: rgba(15, 23, 42, 0.486);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    padding: 35px 30px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(34, 211, 238, 0.08), transparent);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(34, 211, 238, 0.15);
+}
+
+.card-icon {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.card h3 {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.card p {
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.card-arrow {
+    margin-top: auto;
+    color: #22d3ee;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.card:hover .card-arrow {
+    transform: translateX(6px);
+}
+
+/* CARD SALIR */
+
+.card-salir::before {
+    background: linear-gradient(120deg, transparent, rgba(224, 17, 120, 0.08), transparent);
+}
+
+.card-salir:hover {
+    border-color: rgba(224, 17, 120, 0.3);
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(224, 17, 120, 0.15);
+}
+
+.card-salir .card-arrow {
+    color: #e01178;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-panel {
+        padding: 40px 5%;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-logo {
+        font-size: 28px;
+    }
+}

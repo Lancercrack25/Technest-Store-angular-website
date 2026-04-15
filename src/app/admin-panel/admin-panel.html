@@ -1,1 +1,61 @@
-<p>admin-panel works!</p>
+<main class="admin-panel">
+
+  <header class="panel-header">
+    <div class="panel-logo">TechNest <span>Admin</span></div>
+    <p class="panel-subtitle">Panel de administración</p>
+  </header>
+
+  <div class="cards-grid">
+
+    <div class="card" routerLink="/registro/productos">
+      <div class="card-icon">📦</div>
+      <h3>Registro de Productos</h3>
+      <p>Agrega y gestiona los productos de la tienda</p>
+      <div class="card-arrow">→</div>
+    </div>
+
+    <div class="card" routerLink="/registro/provedores">
+      <div class="card-icon">🏭</div>
+      <h3>Registro de Proveedores</h3>
+      <p>Registra nuevos proveedores al sistema</p>
+      <div class="card-arrow">→</div>
+    </div>
+
+    <div class="card" routerLink="/proveedores">
+      <div class="card-icon">🤝</div>
+      <h3>Proveedores</h3>
+      <p>Consulta y administra los proveedores existentes</p>
+      <div class="card-arrow">→</div>
+    </div>
+
+    <div class="card" routerLink="/ventas">
+      <div class="card-icon">💰</div>
+      <h3>Ventas</h3>
+      <p>Revisa el historial y estadísticas de ventas</p>
+      <div class="card-arrow">→</div>
+    </div>
+
+    <div class="card" routerLink="/pedidos">
+      <div class="card-icon">🚚</div>
+      <h3>Pedidos</h3>
+      <p>Administra y da seguimiento a los pedidos</p>
+      <div class="card-arrow">→</div>
+    </div>
+
+    <div class="card" routerLink="/cliente">
+      <div class="card-icon">👥</div>
+      <h3>Clientes</h3>
+      <p>Consulta y gestiona los clientes registrados</p>
+      <div class="card-arrow">→</div>
+    </div>
+
+    <div class="card card-salir" (click)="salir()">
+      <div class="card-icon">🚪</div>
+      <h3>Cerrar Sesión</h3>
+      <p>Salir del panel de administración</p>
+      <div class="card-arrow">→</div>
+    </div>
+
+  </div>
+
+</main>

@@ -268,6 +268,18 @@ app.post('/login', async (req, res) => {
     });
   }
 });
+
+// ==================== login admin ====================
+app.post('/admin/login', (req, res) => {
+  const { nombre, password } = req.body;
+
+  if (nombre === process.env.AD_NAME && password === process.env.AD_PASSWORD) {
+    res.json({ ok: true, rol: 'admin' });
+  } else {
+    res.status(401).json({ error: 'Credenciales incorrectas' });
+  }
+});
+
 // ==================== SERVER ====================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
