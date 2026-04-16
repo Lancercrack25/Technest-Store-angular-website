@@ -1,13 +1,11 @@
-<!-- Admin Login -->
 <main class="admin-login">
   <div class="admin-card-container">
     <div class="admin-card" aria-labelledby="admin-title">
-      <!-- Logo -->
+
       <div class="logo-container" aria-hidden="true">
         <div class="logo-box">TechNest</div>
       </div>
 
-      <!-- Title -->
       <header class="admin-header">
         <h1 id="admin-title" class="admin-title">
           Admin Login
@@ -16,36 +14,37 @@
         <p class="admin-subtitle">Acceso al panel de administrador</p>
       </header>
 
-      <!-- Form -->
-      <form class="admin-form" action="#" method="post" novalidate>
-        <!-- Email -->
+      <form class="admin-form" (ngSubmit)="login()" novalidate>
+
         <div class="input-group">
-          <label for="email">Correo electronico</label>
-          <input id="email" name="email" type="email" placeholder="admin@technest.com" autocomplete="email" required />
+          <label for="adminame">Nombre de administrador</label>
+          <input id="adminame" name="adminame" type="text"
+            placeholder="Nombre del admin"
+            [(ngModel)]="credentials.nombre"
+            autocomplete="username" required />
         </div>
 
-        <!-- Password -->
         <div class="input-group">
           <label for="password">Contraseña</label>
-
           <div class="password-wrapper">
-            <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password"
-              required />
-
-            <!-- Botón para mostrar/ocultar (tú lo conectas con JS si quieres) -->
-            <button class="toggle-password" type="button" aria-label="Show password" aria-pressed="false">
+            <input id="password" name="password"
+              [type]="mostrarPassword ? 'text' : 'password'"
+              placeholder="••••••••"
+              [(ngModel)]="credentials.password"
+              autocomplete="current-password" required />
+            <button class="toggle-password" type="button"
+              (click)="mostrarPassword = !mostrarPassword"
+              aria-label="Show password">
               <span class="eye-icon" aria-hidden="true">👁</span>
             </button>
           </div>
         </div>
 
         <div class="btn-container">
-          <!-- Primary action -->
-          <button class="btn-primary" type="button" routerLink="/admin/panel">Iniciar sesión</button>
-
-          <!-- Secondary action -->
+          <button class="btn-primary" type="submit">Iniciar sesión</button>
           <button class="btn-secondary" type="button" routerLink="/">Regresar a la tienda</button>
         </div>
+
       </form>
     </div>
   </div>

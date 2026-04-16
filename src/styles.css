@@ -122,3 +122,12 @@ body {
     linear-gradient(90deg, rgba(255,0,255,0.1) 1px, transparent 1px);
   background-size: 90px 90px;
 }
+
+.admin-panel {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('assets/images/panel-admin.webp') center / cover no-repeat;
+    flex-direction: column;  
+}

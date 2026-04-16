@@ -28,6 +28,9 @@ import { Mouses } from './mouses/mouses';
 import { Procesadores } from './procesadores/procesadores';
 import { Rams } from './rams/rams';
 import { Teclados } from './teclados/teclados';
+import { Clientes } from './clientes/clientes';
+import { Provedores } from './provedores/provedores';
+
 
 export const routes: Routes = [
   { path: '', component: Login },
@@ -59,5 +62,7 @@ export const routes: Routes = [
   { path: 'mouses', component: Mouses},
   { path: 'procesadores', component: Procesadores},
   { path: 'rams', component: Rams},
-  { path: 'teclados', component: Teclados}
+  { path: 'teclados', component: Teclados},
+  { path: 'clientes', component: Clientes},
+  { path: 'provedores', component: Provedores}
 ];
