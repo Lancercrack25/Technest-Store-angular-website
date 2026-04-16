@@ -12,7 +12,7 @@ import { ClientePerfil} from './cliente-perfil/cliente-perfil';
 import { Carrito  } from './carrito/carrito';
 import { Productos } from './productos/productos';
 import { Recomendador } from './recomendador/recomendador';
-import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component'; 
 import { Ventas } from './ventas/ventas';
 import { RegistroProductos } from './registro-productos/registro-productos';
 import { RegistroProvedores } from './registro-provedores/registro-provedores';
