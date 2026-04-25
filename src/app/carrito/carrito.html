@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="carrito.css">
-
 <div class="carrito-wrapper">
   <div class="carrito-container">
     
@@ -10,38 +8,205 @@
     <h2 class="carrito-titulo"> 
       Mi Carrito de Compras 🛒 </h2>
 
-    <div *ngIf="pagoExitoso" class="mensaje-exito"> 
-    <button (click)="regresar()" class="btn-regresar">
-      ← Regresar
-    </button>
-      <h3 class="exito-titulo">Ingrese método de pago 💳 </h3>
-        
+    <div *ngIf="pagoExitoso && !facturacionCompletada" class="mensaje-exito">
+      <button (click)="regresar()" class="btn-regresar">
+        ← Regresar
+      </button>
+      <h3 class="exito-titulo">Ingrese método de pago 💳</h3>
+
       <div class="formulario-pago">
         <div class="input-grupo">
           <label>Nombre en la tarjeta</label>
-          <input type="text" placeholder="Nombre de la cuenta" class="input-pago" maxlength="30">
+          <input type="text" [(ngModel)]="nombreTitular" name="nombreTitular" placeholder="Nombre de la cuenta" class="input-pago" maxlength="30">
         </div>
-        
+
         <div class="input-grupo">
           <label>Número de Tarjeta</label>
-          <input type="text" placeholder="0000 0000 0000 0000" class="input-pago" maxlength="16">
+          <input type="text" [(ngModel)]="numeroTarjeta" name="numeroTarjeta" placeholder="0000 0000 0000 0000" class="input-pago" maxlength="16">
         </div>
-        
+
         <div class="input-fila">
           <div class="input-grupo mitad">
             <label>Vencimiento</label>
-            <input type="text" placeholder="MM/AA" class="input-pago" maxlength="4">
+            <input type="text" [(ngModel)]="vencimiento" name="vencimiento" placeholder="MM/AA" class="input-pago" maxlength="4">
           </div>
           <div class="input-grupo mitad">
             <label>CVV / NIV</label>
-            <input type="password" placeholder="***" class="input-pago" maxlength="3">
+            <input type="password" [(ngModel)]="cvv" name="cvv" placeholder="***" class="input-pago" maxlength="3">
           </div>
         </div>
       </div>
 
-      <button (click)="reiniciarCarrito()" class="btn-confirmar-pago" style="margin-top: 20px;">
+      <button (click)="confirmarPago()" class="btn-confirmar-pago" style="margin-top: 20px;">
         Confirmar Pago
       </button>
+    </div>
+
+    <div *ngIf="facturacionCompletada" class="mensaje-exito">
+      <button (click)="regresar()" class="btn-regresar">
+        ← Regresar
+      </button>
+      <h3 class="exito-titulo">Factura Generada 📄</h3>
+
+      <div class="factura-container">
+        <div class="factura-header">
+          <div class="factura-logo">
+            <h1>TechNest</h1>
+            <p>Tecnología y Componentes Electrónicos</p>
+          </div>
+          <div class="factura-info">
+            <p><strong>Folio:</strong> {{factura.folio}}</p>
+            <p><strong>Fecha:</strong> {{factura.fecha}}</p>
+            <p><strong>Serie:</strong> {{factura.serie}}</p>
+          </div>
+        </div>
+
+        <div class="factura-seccion">
+          <h4 class="factura-subtitulo">Datos del Cliente</h4>
+          <div class="factura-grid">
+            <div>
+              <p><strong>Nombre:</strong></p>
+              <input type="text" [(ngModel)]="factura.nombreCliente" class="factura-input" placeholder="Nombre completo">
+            </div>
+            <div>
+              <p><strong>RFC:</strong></p>
+              <input type="text" [(ngModel)]="factura.rfc" class="factura-input" placeholder="RFC" maxlength="13">
+            </div>
+            <div>
+              <p><strong>Email:</strong></p>
+              <input type="email" [(ngModel)]="factura.email" class="factura-input" placeholder="correo@ejemplo.com">
+            </div>
+            <div>
+              <p><strong>Teléfono:</strong></p>
+              <input type="tel" [(ngModel)]="factura.telefono" class="factura-input" placeholder="55 1234 5678">
+            </div>
+          </div>
+        </div>
+
+        <div class="factura-seccion">
+          <h4 class="factura-subtitulo">Dirección Fiscal</h4>
+          <div class="factura-grid">
+            <div class="full-width">
+              <p><strong>Calle y Número:</strong></p>
+              <input type="text" [(ngModel)]="factura.calle" class="factura-input" placeholder="Av. Principal #123">
+            </div>
+            <div>
+              <p><strong>Colonia:</strong></p>
+              <input type="text" [(ngModel)]="factura.colonia" class="factura-input" placeholder="Centro">
+            </div>
+            <div>
+              <p><strong>Ciudad:</strong></p>
+              <input type="text" [(ngModel)]="factura.ciudad" class="factura-input" placeholder="Ciudad de México">
+            </div>
+            <div>
+              <p><strong>Estado:</strong></p>
+              <input type="text" [(ngModel)]="factura.estado" class="factura-input" placeholder="CDMX">
+            </div>
+            <div>
+              <p><strong>Código Postal:</strong></p>
+              <input type="text" [(ngModel)]="factura.cp" class="factura-input" placeholder="06000" maxlength="5">
+            </div>
+          </div>
+        </div>
+
+        <div class="factura-seccion">
+          <h4 class="factura-subtitulo">Datos de Facturación</h4>
+          <div class="factura-grid">
+            <div>
+              <p><strong>Régimen Fiscal:</strong></p>
+              <select [(ngModel)]="factura.regimen" class="factura-input">
+                <option value="">Seleccione...</option>
+                <option value="601">601 - General de Ley</option>
+                <option value="603">603 - Personas Físicas</option>
+                <option value="612">612 - Sueldos y Salarios</option>
+                <option value="614">614 - Ingresos por Dividendos</option>
+                <option value="626">626 - RESICO</option>
+              </select>
+            </div>
+            <div>
+              <p><strong>Uso de CFDI:</strong></p>
+              <select [(ngModel)]="factura.usoCfdi" class="factura-input">
+                <option value="">Seleccione...</option>
+                <option value="G01">G01 - Adquisición de mercancías</option>
+                <option value="G02">G02 - Devoluciones, descuentos o bonificaciones</option>
+                <option value="G03">G03 - Gastos en general</option>
+                <option value="I01">I01 - Construcciones inmovilizado</option>
+                <option value="D01">D01 - Honorarios médicos</option>
+              </select>
+            </div>
+            <div>
+              <p><strong>Método de Pago:</strong></p>
+              <select [(ngModel)]="factura.metodoPago" class="factura-input">
+                <option value="">Seleccione...</option>
+                <option value="PUE">PUE - Pago en una sola exhibición</option>
+                <option value="PPD">PPD - Pago en parcialidades</option>
+              </select>
+            </div>
+            <div>
+              <p><strong>Forma de Pago:</strong></p>
+              <select [(ngModel)]="factura.formaPago" class="factura-input">
+                <option value="">Seleccione...</option>
+                <option value="01">01 - Efectivo</option>
+                <option value="02">02 - Cheque nominativo</option>
+                <option value="03">03 - Transferencia electrónica</option>
+                <option value="04">04 - Tarjeta de crédito</option>
+                <option value="05">05 - Monedero electrónico</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="factura-seccion">
+          <h4 class="factura-subtitulo">Conceptos</h4>
+          <table class="factura-tabla">
+            <thead>
+              <tr>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio Unit.</th>
+                <th>Importe</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of itemsCarrito">
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>${{ item.precio }}</td>
+                <td>${{ item.subtotal }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="factura-totales">
+          <div class="total-row">
+            <span>Subtotal:</span>
+            <span>${{ subtotal }}</span>
+          </div>
+          <div class="total-row">
+            <span>IVA (16%):</span>
+            <span>${{ impuestos }}</span>
+          </div>
+          <div class="total-row total-final">
+            <span>Total:</span>
+            <span>${{ total }}</span>
+          </div>
+        </div>
+
+        <div class="factura-footer">
+          <p>Este documento es una representación gráfica de la factura.</p>
+          <p>Para efectos fiscales consulte la factura electrónica en el portal del SAT.</p>
+        </div>
+
+        <div class="factura-actions">
+          <button (click)="descargarFactura()" class="btn-descargar">
+            📥 Descargar Factura
+          </button>
+          <button (click)="reiniciarCarrito()" class="btn-finalizar">
+            ✓ Finalizar Compra
+          </button>
+        </div>
+      </div>
     </div>
 
     <div *ngIf="!pagoExitoso">

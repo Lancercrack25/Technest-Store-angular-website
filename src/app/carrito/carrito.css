@@ -198,6 +198,19 @@
   color: rgba(255, 255, 255, 0.3);
 }
 
+.error-mensaje {
+  color: #ff0000;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.input-pago.error {
+  border-color: #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
 .input-fila {
   display: flex;
   justify-content: space-between;
@@ -212,4 +225,211 @@
 @keyframes aparecer {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* FACTURA */
+.factura-container {
+  background: rgba(25, 20, 40, 0.95);
+  color: white;
+  padding: 40px;
+  border-radius: 15px;
+  margin-top: 20px;
+  border-top: 3px solid #00b9b9;
+  box-shadow: 0 0 30px rgba(0, 185, 185, 0.3);
+}
+
+.factura-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #00b9b9;
+  margin-bottom: 25px;
+}
+
+.factura-logo h1 {
+  background: linear-gradient(90deg, #22d3ee, #e01178);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+  font-size: 2rem;
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+}
+
+.factura-logo p {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin: 5px 0 0 0;
+}
+
+.factura-info {
+  text-align: right;
+}
+
+.factura-info p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.factura-seccion {
+  margin-bottom: 25px;
+}
+
+.factura-subtitulo {
+  color: #00b9b9;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+  text-shadow: 0 0 10px rgba(0, 185, 185, 0.5);
+}
+
+.factura-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.factura-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+.factura-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #00b9b9;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  box-sizing: border-box;
+}
+
+.factura-input:focus {
+  outline: none;
+  border-color: #22d3ee;
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.factura-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.factura-input option {
+  background: #1a1a2e;
+  color: white;
+}
+
+.factura-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.factura-tabla th,
+.factura-tabla td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+  color: #ccc;
+}
+
+.factura-tabla th {
+  background: linear-gradient(90deg, #22d3ee, #e01178);
+  color: white;
+  font-weight: 600;
+}
+
+.factura-tabla tr:hover {
+  background: rgba(34, 211, 238, 0.1);
+}
+
+.factura-tabla td {
+  color: white;
+}
+
+.factura-totales {
+  background: rgba(0, 185, 185, 0.15);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 1px solid rgba(0, 185, 185, 0.3);
+}
+
+.total-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+  padding: 8px 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.total-row.total-final {
+  border-top: 2px solid #00b9b9;
+  margin-top: 10px;
+  padding-top: 15px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #00b9b9;
+  text-shadow: 0 0 10px rgba(0, 185, 185, 0.5);
+}
+
+.factura-footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+}
+
+.factura-footer p {
+  color: #888;
+  font-size: 0.85rem;
+  margin: 5px 0;
+}
+
+.factura-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.btn-descargar {
+  background: transparent;
+  color: #00b9b9;
+  border: 1px solid #00b9b9;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-descargar:hover {
+  background: rgba(0, 185, 185, 0.1);
+  box-shadow: 0 0 15px rgba(0, 185, 185, 0.5);
+}
+
+.btn-finalizar {
+  background: transparent;
+  color: #ff00ff;
+  border: 1px solid #ff00ff;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-finalizar:hover {
+  background: rgba(255, 0, 255, 0.1);
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
 }

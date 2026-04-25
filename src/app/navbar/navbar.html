@@ -12,11 +12,19 @@
     </ul>
 
     <div class="user-menu">
-        <img 
-            [src]="userImage" 
+        <img
+            [src]="userImage || 'assets/default-avatar.png'"
             class="avatar"
             (click)="toggleMenu()"
+            *ngIf="userImage"
         />
+        <div
+            *ngIf="!userImage"
+            class="avatar avatar-placeholder"
+            (click)="toggleMenu()"
+        >
+            {{ userName ? userName.charAt(0).toUpperCase() : 'U' }}
+        </div>
 
         <ul *ngIf="menuOpen" class="dropdown">
             <li><a (click)="goToPerfil()" class="texts">Mi perfil</a></li>

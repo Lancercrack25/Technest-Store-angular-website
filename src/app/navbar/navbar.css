@@ -100,6 +100,28 @@
     box-shadow:0 0 12px rgba(34,211,238,0.6);
 }
 
+.avatar-placeholder{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#22d3ee,#e01178);
+    color:white;
+    font-weight:bold;
+    font-size:18px;
+    cursor:pointer;
+    border:2px solid rgba(255,255,255,0.2);
+    transition:0.3s;
+}
+
+.avatar-placeholder:hover{
+    transform: scale(1.08);
+    border-color:#22d3ee;
+    box-shadow:0 0 12px rgba(34,211,238,0.6);
+}
+
 /* DROPDOWN */
 
 .dropdown{

@@ -1,20 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, Location } from '@angular/common'; 
+import { CommonModule, Location } from '@angular/common';
+import { FormsModule } from '@angular/forms'; 
 import { CarritoService } from '../services/user.service'; 
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [CommonModule], 
+  imports: [CommonModule, FormsModule],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css' 
 })
 export class Carrito implements OnInit {
   pagoExitoso: boolean = false;
+  facturacionCompletada: boolean = false;
   itemsCarrito: any[] = [];
   total: number = 0;
-  
-  idClientePrueba: number = 1; 
+  subtotal: number = 0;
+  impuestos: number = 0;
+
+  idClientePrueba: number = 1;
+
+  // Campos del formulario de pago
+  nombreTitular: string = '';
+  numeroTarjeta: string = '';
+  vencimiento: string = '';
+  cvv: string = '';
+
+  // Datos de facturación
+  factura: any = {
+    folio: '',
+    serie: '',
+    fecha: '',
+    nombreCliente: '',
+    rfc: '',
+    email: '',
+    telefono: '',
+    calle: '',
+    colonia: '',
+    ciudad: '',
+    estado: '',
+    cp: '',
+    regimen: '',
+    usoCfdi: '',
+    metodoPago: '',
+    formaPago: ''
+  }; 
 
   // constructor
   constructor(
@@ -24,18 +54,36 @@ export class Carrito implements OnInit {
 
   ngOnInit(): void {
     this.cargarCarrito();
+    this.generarFolio();
   }
 
   cargarCarrito() {
     this.carritoService.obtenerCarrito(this.idClientePrueba).subscribe({
       next: (datosDelBackend) => {
         this.itemsCarrito = datosDelBackend;
-        this.total = this.itemsCarrito.reduce((suma, item) => suma + Number(item.subtotal), 0);
+        this.subtotal = this.itemsCarrito.reduce((suma, item) => suma + Number(item.subtotal), 0);
+        this.impuestos = this.subtotal * 0.16;
+        this.total = this.subtotal + this.impuestos;
       },
       error: (err) => {
         console.error('Error al cargar el carrito:', err);
       }
     });
+  }
+
+  generarFolio() {
+    const fecha = new Date();
+    this.factura.folio = Math.floor(Math.random() * 900000) + 100000;
+    this.factura.serie = 'A';
+    this.factura.fecha = fecha.toLocaleDateString('es-MX') + ' ' + fecha.toLocaleTimeString('es-MX');
+  }
+
+  confirmarPago() {
+    this.facturacionCompletada = true;
+  }
+
+  descargarFactura() {
+    alert('Descargando factura XML y PDF...');
   }
 
   //botton payment
@@ -44,12 +92,49 @@ export class Carrito implements OnInit {
   }
 
   simularPago() {
+    console.log('Botón Pagar presionado');
+    console.log('Nombre:', this.nombreTitular);
+    console.log('Tarjeta:', this.numeroTarjeta);
+    console.log('Vencimiento:', this.vencimiento);
+    console.log('CVV:', this.cvv);
+
     this.pagoExitoso = true;
   }
 
   reiniciarCarrito() {
     this.pagoExitoso = false;
+    this.facturacionCompletada = false;
     this.itemsCarrito = [];
     this.total = 0;
+    this.subtotal = 0;
+    this.impuestos = 0;
+
+    // Limpiar formulario de pago
+    this.nombreTitular = '';
+    this.numeroTarjeta = '';
+    this.vencimiento = '';
+    this.cvv = '';
+
+    // Limpiar datos de facturación
+    this.factura = {
+      folio: '',
+      serie: '',
+      fecha: '',
+      nombreCliente: '',
+      rfc: '',
+      email: '',
+      telefono: '',
+      calle: '',
+      colonia: '',
+      ciudad: '',
+      estado: '',
+      cp: '',
+      regimen: '',
+      usoCfdi: '',
+      metodoPago: '',
+      formaPago: ''
+    };
+
+    this.generarFolio();
   }
 }

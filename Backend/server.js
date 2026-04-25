@@ -5,7 +5,8 @@ import { initDatabase } from './init.js';
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 await initDatabase();
 
@@ -153,6 +154,18 @@ app.delete('/productos/:id', async (req, res) => {
 });
 
 // ==================== CARRITO ====================
+app.get('/carrito/:idCliente', async (req, res) => {
+  const r = await pool.query(`
+    SELECT cd.*, p.nombre, p.precio
+    FROM carrito_detalle cd
+    JOIN producto p ON cd.id_producto = p.id_producto
+    WHERE cd.id_carrito = (
+      SELECT id_carrito FROM carrito WHERE id_cliente = $1 AND estado = 'Activo'
+    )
+  `, [req.params.idCliente]);
+  res.json(r.rows);
+});
+
 app.post('/carrito', async (req, res) => {
   const { id_cliente } = req.body;
   const r = await pool.query(`
