@@ -1,1 +1,43 @@
-<p>registro-provedores works!</p>
+<main class="registro-container">
+  <div class="registro-card">
+
+    <div class="registro-header">
+      <h1>Registro de Proveedor</h1>
+      <p>Agrega un nuevo proveedor al sistema</p>
+    </div>
+
+    <form class="registro-form" (ngSubmit)="guardar()">
+
+      <div class="input-group">
+        <label>Razón Social</label>
+        <input type="text" [(ngModel)]="proveedor.razon_social" name="razon_social" placeholder="Nombre de la empresa" required>
+      </div>
+
+      <div class="input-group">
+        <label>RFC</label>
+        <input type="text" [(ngModel)]="proveedor.rfc" name="rfc" placeholder="RFC de la empresa" maxlength="13" required>
+      </div>
+
+      <div class="input-group">
+        <label>Contacto</label>
+        <input type="text" [(ngModel)]="proveedor.contacto" name="contacto" placeholder="Nombre del contacto">
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="proveedor.email" name="email" placeholder="correo@empresa.com">
+      </div>
+
+      <div class="input-group">
+        <label>Teléfono</label>
+        <input type="text" [(ngModel)]="proveedor.telefono" name="telefono" placeholder="10 dígitos" maxlength="15">
+      </div>
+
+      <div class="btn-group">
+        <button type="submit" class="btn-guardar">Guardar Proveedor</button>
+        <button type="button" class="btn-cancelar" routerLink="/admin/panel">Cancelar</button>
+      </div>
+
+    </form>
+  </div>
+</main>

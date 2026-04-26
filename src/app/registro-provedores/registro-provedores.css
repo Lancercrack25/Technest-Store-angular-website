@@ -1,0 +1,138 @@
+.registro-container {
+    min-height: 100vh;
+    background: #020617;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.registro-card {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 45px 40px;
+    width: 100%;
+    max-width: 550px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.registro-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.registro-header h1 {
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #22d3ee, #e01178);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+.registro-header p {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.registro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"] {
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(2, 6, 23, 0.8);
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: rgba(34, 211, 238, 0.5);
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.08);
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #cbd5e1;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #22d3ee;
+    cursor: pointer;
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-guardar {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #22d3ee, #e01178);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-guardar:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 20px rgba(224, 17, 120, 0.35);
+}
+
+.btn-cancelar {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: transparent;
+    color: #94a3b8;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-cancelar:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .registro-card {
+        padding: 30px 20px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+}

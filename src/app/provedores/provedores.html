@@ -1,1 +1,61 @@
-<p>provedores works!</p>
+<main class="proveedores-container">
+
+  <div class="proveedores-header">
+    <div>
+      <h1>Proveedores</h1>
+      <p>Lista de proveedores registrados en el sistema</p>
+    </div>
+    <div class="header-btns">
+      <button class="btn-volver" routerLink="/admin/panel">← Volver al Panel</button>
+      <button class="btn-agregar" routerLink="/registro/provedores">+ Agregar Proveedor</button>
+    </div>
+  </div>
+
+  @if (cargando) {
+    <div class="loading">Cargando proveedores...</div>
+  }
+
+  @if (cargado && proveedores.length === 0) {
+    <div class="empty">No hay proveedores registrados</div>
+  }
+
+  @if (cargado && proveedores.length > 0) {
+    <div class="tabla-wrapper">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Razón Social</th>
+            <th>RFC</th>
+            <th>Contacto</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of proveedores; track p.id_proveedor) {
+            <tr>
+              <td>{{ p.id_proveedor }}</td>
+              <td>{{ p.razon_social }}</td>
+              <td>{{ p.rfc }}</td>
+              <td>{{ p.contacto }}</td>
+              <td>{{ p.email }}</td>
+              <td>{{ p.telefono }}</td>
+              <td>
+                <span [class]="p.activo ? 'badge-activo' : 'badge-inactivo'">
+                  {{ p.activo ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td>
+                <button class="btn-eliminar" (click)="eliminar(p.id_proveedor)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+</main>

@@ -1,0 +1,181 @@
+.proveedores-container {
+    min-height: 100vh;
+    background: #020617;
+    padding: 40px 6%;
+    color: white;
+}
+
+.proveedores-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.proveedores-header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #22d3ee, #e01178);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+}
+
+.proveedores-header p {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.header-btns {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-volver {
+    padding: 9px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: transparent;
+    color: #94a3b8;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-volver:hover {
+    border-color: #22d3ee;
+    color: #22d3ee;
+}
+
+.btn-agregar {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #22d3ee, #e01178);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-agregar:hover {
+    transform: scale(1.04);
+    box-shadow: 0 5px 20px rgba(224, 17, 120, 0.35);
+}
+
+.tabla-wrapper {
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(15, 23, 42, 0.9);
+}
+
+.tabla thead tr {
+    background: rgba(34, 211, 238, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tabla th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 13px;
+    color: #22d3ee;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabla td {
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #cbd5e1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.tabla tbody tr {
+    transition: 0.2s;
+}
+
+.tabla tbody tr:hover {
+    background: rgba(34, 211, 238, 0.05);
+}
+
+.tabla tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.badge-activo {
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-inactivo {
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.btn-eliminar {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-eliminar:hover {
+    background: rgba(239, 68, 68, 0.3);
+}
+
+.loading {
+    text-align: center;
+    color: #94a3b8;
+    padding: 60px;
+    font-size: 16px;
+}
+
+.empty {
+    text-align: center;
+    color: #94a3b8;
+    padding: 60px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.9);
+}
+
+@media (max-width: 768px) {
+    .proveedores-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-btns {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-volver,
+    .btn-agregar {
+        width: 100%;
+        text-align: center;
+    }
+}

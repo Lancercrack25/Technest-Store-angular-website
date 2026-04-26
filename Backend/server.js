@@ -98,11 +98,18 @@ app.get('/proveedores', async (_, res) => {
 
 app.post('/proveedores', async (req, res) => {
   const { razon_social, rfc, contacto, email, telefono } = req.body;
-  const r = await pool.query(`
-    INSERT INTO proveedor (razon_social,rfc,contacto,email,telefono,activo)
-    VALUES ($1,$2,$3,$4,$5,true) RETURNING *
-  `, [razon_social, rfc, contacto, email, telefono]);
-  res.json(r.rows[0]);
+  
+  const id = 'PRV' + Date.now().toString().slice(-5);
+  
+  try {
+    const r = await pool.query(`
+      INSERT INTO proveedor (id_proveedor, razon_social, rfc, contacto, email, telefono, activo)
+      VALUES ($1,$2,$3,$4,$5,$6,true) RETURNING *
+    `, [id, razon_social, rfc, contacto, email, telefono]);
+    res.json(r.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.put('/proveedores/:id', async (req, res) => {
