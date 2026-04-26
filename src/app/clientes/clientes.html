@@ -1,1 +1,56 @@
-<p>clientes works!</p>
+<main class="clientes-container">
+
+  <div class="clientes-header">
+    <div>
+      <h1>Clientes</h1>
+      <p>Lista de clientes registrados en el sistema</p>
+    </div>
+    <div class="header-btns">
+      <button class="btn-volver" routerLink="/admin/panel">← Volver al Panel</button>
+    </div>
+  </div>
+
+  @if (cargando) {
+    <div class="loading">Cargando clientes...</div>
+  }
+
+  @if (cargado && clientes.length === 0) {
+    <div class="empty">No hay clientes registrados</div>
+  }
+
+  @if (cargado && clientes.length > 0) {
+    <div class="tabla-wrapper">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (c of clientes; track $index) {
+            <tr>
+              <td>{{ c.id_cliente }}</td>
+              <td>{{ c.nombre }}</td>
+              <td>{{ c.email }}</td>
+              <td>{{ c.telefono }}</td>
+              <td>
+                <span [class]="c.rol === 'admin' ? 'badge-admin' : 'badge-cliente'">
+                  {{ c.rol }}
+                </span>
+              </td>
+              <td>
+                <button class="btn-eliminar" (click)="eliminar(c.id_cliente)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+</main>

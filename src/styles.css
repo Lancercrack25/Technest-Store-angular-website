@@ -131,3 +131,18 @@ body {
     background: url('assets/images/panel-admin.webp') center / cover no-repeat;
     flex-direction: column;  
 }
+
+.clientes {
+    min-height: 100vh;
+    display: flex;
+    justify-content: flex-start; /* mejor que center para tablas */
+    align-items: center;
+    flex-direction: column;
+
+    /* 🔥 FONDO */
+    background-image: url('assets/images/epic.webp'); /* prueba también ../assets si no funciona */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
