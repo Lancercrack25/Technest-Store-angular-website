@@ -77,6 +77,7 @@ export async function initDatabase() {
         id_categoria VARCHAR(10),
         id_proveedor VARCHAR(10),
         activo BOOLEAN,
+        imagen TEXT,
         FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria),
         FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
       );

@@ -146,6 +146,20 @@ app.post('/productos', async (req, res) => {
   res.json(r.rows[0]);
 });
 
+app.post('/productos', async (req, res) => {
+  const { numero_de_serie, nombre, descripcion, precio, costo, garantia_meses, id_categoria, id_proveedor, imagen } = req.body;
+  const id = 'PROD' + Date.now().toString().slice(-4);
+  try {
+    const r = await pool.query(`
+      INSERT INTO producto (id_producto, numero_de_serie, nombre, descripcion, precio, costo, garantia_meses, id_categoria, id_proveedor, activo, imagen)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,true,$10) RETURNING *
+    `, [id, numero_de_serie, nombre, descripcion, precio, costo, garantia_meses, id_categoria, id_proveedor, imagen]);
+    res.json(r.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.put('/productos/:id', async (req, res) => {
   const { numero_de_serie, nombre, descripcion, precio, costo, garantia_meses, id_categoria, id_proveedor } = req.body;
   const r = await pool.query(`

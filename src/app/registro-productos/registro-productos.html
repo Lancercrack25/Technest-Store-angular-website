@@ -1,1 +1,85 @@
-<p>registro-productos works!</p>
+<main class="registro-container">
+  <div class="registro-card">
+
+    <div class="registro-header">
+      <h1>Registro de Producto</h1>
+      <p>Agrega un nuevo producto al catálogo</p>
+    </div>
+
+    <form class="registro-form" (ngSubmit)="guardar()">
+
+      <div class="form-grid">
+
+        <div class="input-group">
+          <label>Nombre del producto</label>
+          <input type="text" [(ngModel)]="producto.nombre" name="nombre" placeholder="Ej. Intel Core i9" required>
+        </div>
+
+        <div class="input-group">
+          <label>Número de serie</label>
+          <input type="text" [(ngModel)]="producto.numero_de_serie" name="numero_de_serie" placeholder="Ej. SN-001">
+        </div>
+
+        <div class="input-group full">
+          <label>Descripción</label>
+          <textarea [(ngModel)]="producto.descripcion" name="descripcion" placeholder="Descripción del producto" rows="3"></textarea>
+        </div>
+
+        <div class="input-group">
+          <label>Precio de venta ($)</label>
+          <input type="number" [(ngModel)]="producto.precio" name="precio" placeholder="0.00" min="0" required>
+        </div>
+
+        <div class="input-group">
+          <label>Costo ($)</label>
+          <input type="number" [(ngModel)]="producto.costo" name="costo" placeholder="0.00" min="0">
+        </div>
+
+        <div class="input-group">
+          <label>Garantía (meses)</label>
+          <input type="number" [(ngModel)]="producto.garantia_meses" name="garantia_meses" placeholder="12" min="0">
+        </div>
+
+        <div class="input-group">
+          <label>Categoría</label>
+          <select [(ngModel)]="producto.id_categoria" name="id_categoria" required>
+            <option value="">Seleccionar categoría</option>
+            @for (c of categorias; track $index) {
+              <option [value]="c.id_categoria">{{ c.nombre }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Proveedor</label>
+          <select [(ngModel)]="producto.id_proveedor" name="id_proveedor" required>
+            <option value="">Seleccionar proveedor</option>
+            @for (p of proveedores; track $index) {
+              <option [value]="p.id_proveedor">{{ p.razon_social }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="input-group full">
+          <label>Imagen del producto</label>
+          <div class="imagen-wrapper">
+            @if (imagenPreview) {
+              <img [src]="imagenPreview" class="imagen-preview" />
+            }
+            <label class="upload-btn">
+              {{ imagenPreview ? 'Cambiar imagen' : 'Seleccionar imagen' }}
+              <input type="file" accept="image/*" (change)="onImageSelected($event)" hidden>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="btn-group">
+        <button type="submit" class="btn-guardar">Guardar Producto</button>
+        <button type="button" class="btn-cancelar" routerLink="/admin/panel">Cancelar</button>
+      </div>
+
+    </form>
+  </div>
+</main>

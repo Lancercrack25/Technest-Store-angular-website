@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
-import { AdminLogin } from '../admin-login/admin-login';
+import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class Login {
   nombre = '';
   password = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
+
   login() {
 
     if (!this.nombre || !this.password) {
@@ -57,6 +59,14 @@ export class Login {
       }
     });
   }
+
+  ngOnInit() {
+  // Solo bloquea la flecha, no redirige automáticamente
+  history.pushState(null, '', window.location.href);
+  window.onpopstate = () => {
+    history.pushState(null, '', window.location.href);
+  };
+}
 
   // ==========================
   // ATAJO Ctrl + L
