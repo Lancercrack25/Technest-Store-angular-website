@@ -1,0 +1,33 @@
+<main class="registro-container">
+  <div class="registro-card">
+
+    <div class="registro-header">
+      <h1>Registro de Categoría</h1>
+      <p>Agrega una nueva categoría al sistema</p>
+    </div>
+
+    <form class="registro-form" (ngSubmit)="guardar()">
+
+      <div class="input-group">
+        <label>ID Categoría</label>
+        <input type="text" [(ngModel)]="categoria.id_categoria" name="id_categoria" placeholder="Ej. CAT001" maxlength="10" required>
+      </div>
+
+      <div class="input-group">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="categoria.nombre" name="nombre" placeholder="Ej. Procesadores" required>
+      </div>
+
+      <div class="input-group">
+        <label>Descripción</label>
+        <textarea [(ngModel)]="categoria.descripcion" name="descripcion" placeholder="Descripción de la categoría" rows="3"></textarea>
+      </div>
+
+      <div class="btn-group">
+        <button type="submit" class="btn-guardar">Guardar Categoría</button>
+        <button type="button" class="btn-cancelar" routerLink="/admin/panel">Cancelar</button>
+      </div>
+
+    </form>
+  </div>
+</main>

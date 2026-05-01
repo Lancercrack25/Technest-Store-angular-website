@@ -30,6 +30,9 @@ import { Rams } from './rams/rams';
 import { Teclados } from './teclados/teclados';
 import { Clientes } from './clientes/clientes';
 import { Provedores } from './provedores/provedores';
+import { BarraBusqueda } from './barra-busqueda/barra-busqueda';
+import { MenuCategorias } from './menu-categorias/menu-categorias';
+import { CategoriaRegistro } from './categoria-registro/categoria-registro';
 
 
 export const routes: Routes = [
@@ -64,5 +67,8 @@ export const routes: Routes = [
   { path: 'rams', component: Rams},
   { path: 'teclados', component: Teclados},
   { path: 'clientes', component: Clientes},
-  { path: 'provedores', component: Provedores}
+  { path: 'provedores', component: Provedores},
+  { path: 'barra-busqueda', component: BarraBusqueda},
+  { path: 'menu-categorias', component: MenuCategorias},
+  { path: 'categoria-registro', component: CategoriaRegistro}
 ];

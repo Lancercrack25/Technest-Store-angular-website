@@ -1,10 +1,10 @@
 .registro-container {
     min-height: 100vh;
-    background: #020617;
+    background: linear-gradient(135deg, #22041e, #0b172e);
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 60px 20px;
+    align-items: center;
+    padding: 40px 20px;
 }
 
 .registro-card {
@@ -13,7 +13,7 @@
     border-radius: 20px;
     padding: 45px 40px;
     width: 100%;
-    max-width: 750px;
+    max-width: 550px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
@@ -25,7 +25,7 @@
 .registro-header h1 {
     font-size: 26px;
     font-weight: 800;
-    background: linear-gradient(90deg, #22d3ee, #e01111);
+    background: linear-gradient(90deg, #b422ee, #e01178);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 8px;
@@ -36,11 +36,10 @@
     font-size: 14px;
 }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.registro-form {
+    display: flex;
+    flex-direction: column;
     gap: 18px;
-    margin-bottom: 25px;
 }
 
 .input-group {
@@ -49,13 +48,14 @@
     gap: 6px;
 }
 
-.input-group.full {
-    grid-column: 1 / -1;
-}
-
 .input-group label {
     font-size: 13px;
     color: #94a3b8;
+}
+
+.opcional {
+    color: #475569;
+    font-size: 12px;
 }
 
 .input-group input,
@@ -89,67 +89,10 @@
     min-height: 80px;
 }
 
-.select-wrapper {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.select-wrapper select {
-    flex: 1;
-}
-
-.btn-recargar {
-    padding: 11px 14px;
-    border-radius: 8px;
-    border: 1px solid rgba(34, 211, 238, 0.3);
-    background: rgba(34, 211, 238, 0.05);
-    color: #22d3ee;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-recargar:hover {
-    background: rgba(34, 211, 238, 0.15);
-    border-color: rgba(34, 211, 238, 0.6);
-}
-
-.imagen-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-.imagen-preview {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 2px solid rgba(34, 211, 238, 0.3);
-}
-
-.upload-btn {
-    font-size: 13px;
-    color: #22d3ee;
-    cursor: pointer;
-    padding: 8px 18px;
-    border-radius: 8px;
-    border: 1px solid rgba(34, 211, 238, 0.3);
-    background: rgba(34, 211, 238, 0.05);
-    transition: 0.3s;
-    user-select: none;
-}
-
-.upload-btn:hover {
-    background: rgba(34, 211, 238, 0.12);
-    border-color: rgba(34, 211, 238, 0.6);
-}
-
 .btn-group {
     display: flex;
     gap: 12px;
+    margin-top: 10px;
 }
 
 .btn-guardar {
@@ -157,7 +100,7 @@
     padding: 12px;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(90deg, #ee2222, #11c8e0);
+    background: linear-gradient(90deg, #22d3ee, #9411e0);
     color: white;
     font-size: 15px;
     font-weight: 600;
@@ -190,10 +133,6 @@
 @media (max-width: 600px) {
     .registro-card {
         padding: 30px 20px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
     }
 
     .btn-group {

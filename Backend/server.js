@@ -68,12 +68,16 @@ app.get('/categorias', async (_, res) => {
 });
 
 app.post('/categorias', async (req, res) => {
-  const { nombre, descripcion, id_padre } = req.body;
-  const r = await pool.query(`
-    INSERT INTO categoria (nombre,descripcion,id_padre)
-    VALUES ($1,$2,$3) RETURNING *
-  `, [nombre, descripcion, id_padre]);
-  res.json(r.rows[0]);
+  const { id_categoria, nombre, descripcion } = req.body;
+  try {
+    const r = await pool.query(`
+      INSERT INTO categoria (id_categoria, nombre, descripcion, id_padre)
+      VALUES ($1,$2,$3,NULL) RETURNING *
+    `, [id_categoria, nombre, descripcion]);
+    res.json(r.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.put('/categorias/:id', async (req, res) => {

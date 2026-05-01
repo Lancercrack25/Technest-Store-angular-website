@@ -42,12 +42,15 @@
 
         <div class="input-group">
           <label>Categoría</label>
-          <select [(ngModel)]="producto.id_categoria" name="id_categoria" required>
-            <option value="">Seleccionar categoría</option>
-            @for (c of categorias; track $index) {
-              <option [value]="c.id_categoria">{{ c.nombre }}</option>
-            }
-          </select>
+          <div class="select-wrapper">
+            <select [(ngModel)]="producto.id_categoria" name="id_categoria" required>
+              <option value="">Seleccionar categoría</option>
+              @for (c of categorias; track $index) {
+                <option [value]="c.id_categoria">{{ c.nombre }}</option>
+              }
+            </select>
+            <button type="button" class="btn-recargar" (click)="recargarCategorias()">↺</button>
+          </div>
         </div>
 
         <div class="input-group">

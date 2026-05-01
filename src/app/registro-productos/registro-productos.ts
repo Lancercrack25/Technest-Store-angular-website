@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class RegistroProductos implements OnInit {
 
-  categorias: any[] = [];
+categorias: any[] = [];
   proveedores: any[] = [];
   imagenPreview: string = '';
 
@@ -33,11 +33,27 @@ export class RegistroProductos implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
+    this.cargarCategorias();
+    this.http.get('http://localhost:3000/proveedores').subscribe((res: any) => {
+      this.proveedores = res;
+    });
+  }
+
+  cargarCategorias() {
     this.http.get('http://localhost:3000/categorias').subscribe((res: any) => {
       this.categorias = res;
     });
-    this.http.get('http://localhost:3000/proveedores').subscribe((res: any) => {
-      this.proveedores = res;
+  }
+
+  recargarCategorias() {
+    this.cargarCategorias();
+    Swal.fire({
+      icon: 'success',
+      title: 'Categorías actualizadas',
+      timer: 1000,
+      showConfirmButton: false,
+      background: '#0f172a',
+      color: '#fff'
     });
   }
 
