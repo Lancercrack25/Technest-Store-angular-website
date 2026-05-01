@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { Navbar } from "../navbar/navbar";
 
 @Component({
   selector: 'app-discos',
   standalone: true,
-  imports: [],
+  imports: [Navbar],
   templateUrl: './discos.html',
   styleUrl: './discos.css',
 })

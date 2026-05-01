@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { Navbar } from "../navbar/navbar";
 
 @Component({
   selector: 'app-audifonos',
   standalone: true,
-  imports: [],
+  imports: [Navbar],
   templateUrl: './audifonos.html',
   styleUrl: './audifonos.css',
 })

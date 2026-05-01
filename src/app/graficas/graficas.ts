@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { Navbar } from "../navbar/navbar";
 
 @Component({
   selector: 'app-graficas',
   standalone: true,
-  imports: [],
+  imports: [Navbar],
   templateUrl: './graficas.html',
   styleUrl: './graficas.css',
 })

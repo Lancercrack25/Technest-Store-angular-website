@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { Navbar } from "../navbar/navbar";
 
 @Component({
   selector: 'app-monitores',
   standalone: true,
-  imports: [],
+  imports: [Navbar],
   templateUrl: './monitores.html',
   styleUrl: './monitores.css',
 })
