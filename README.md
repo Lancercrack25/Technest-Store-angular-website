@@ -71,7 +71,7 @@ technest-store/
 
 ### Autenticación
 
-<video src="https://github.com/user-attachments/assets/45880ea9-a7b9-4253-8955-29c838e06b83" autoplay muted loop playsinline width="620" height="680></video>
+https://github.com/user-attachments/assets/45880ea9-a7b9-4253-8955-29c838e06b83
 
 - **Login** — Inicio de sesión con nombre de usuario y contraseña. Incluye acceso rápido al panel admin con `Ctrl + L`.
 - **Registro** — Formulario para crear una nueva cuenta de cliente.
@@ -79,7 +79,7 @@ technest-store/
 
 ### Una vez logueado
 
-<video src="https://github.com/user-attachments/assets/8a18506d-a8fb-4d45-b794-62bd9b330812" autoplay muted loop playsinline width="620" height="680></video>
+https://github.com/user-attachments/assets/8a18506d-a8fb-4d45-b794-62bd9b330812
 
 - **Inicio** — Página principal con información de la tienda y categorías destacadas.
 
@@ -107,7 +107,7 @@ technest-store/
 
 ## 🔐 Panel de Administración
 
-<video src="https://github.com/user-attachments/assets/b3c83432-6475-4962-b941-6193ecc9b86e" autoplay muted loop playsinline width="620" height="680></video>
+https://github.com/user-attachments/assets/b3c83432-6475-4962-b941-6193ecc9b86e
 
 ### Acceso
 El panel admin se accede desde `/admin/login`. Las credenciales se configuran en el archivo `.env` del backend con las variables `AD_NAME` y `AD_PASSWORD`.
