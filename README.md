@@ -17,7 +17,7 @@ Tienda en línea especializada en hardware y componentes de alto rendimiento par
 
 ```bash
 git clone https://github.com/Lancercrack25/Technest-Store-angular-website.git
-cd nombre de la carpeta donde clonaste el repo
+cd nombre de la ruta donde tienes carpeta donde clonaste el repo
 ```
 Crea un archivo `.env` en la carpeta `Backend` con las siguientes variables:
 
@@ -41,6 +41,7 @@ technest-store/
 │   ├── server.js         # Servidor Express y endpoints REST
 │   ├── db.js             # Configuración de conexión a PostgreSQL
 │   ├── init.js           # Creación automática de tablas
+│   ├── Gemini_api.js     #archivo que se encarga de manejar la api de gemini para cierto componente
 │   └── .env              # Variables de entorno (no subir a git)
 ├── src/
 │   └── app/
