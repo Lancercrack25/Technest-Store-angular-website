@@ -1,5 +1,6 @@
 # Technest Store website
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d6f90f0c-6697-4397-9de9-cd688fd6b362" />
+<img width="1936" height="960" alt="image" src="https://github.com/user-attachments/assets/06aabf0d-9242-44a5-a351-f813450a9fcb" />
+
 Tienda en línea especializada en hardware y componentes de alto rendimiento para computadoras. Construida con Angular en el frontend y Node.js + PostgreSQL en el backend.
 
 ---
