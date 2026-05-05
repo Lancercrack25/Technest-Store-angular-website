@@ -16,8 +16,8 @@ Tienda en línea especializada en hardware y componentes de alto rendimiento par
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/technest-store.git
-cd technest-store
+git clone https://github.com/Lancercrack25/Technest-Store-angular-website.git
+cd nombre de la carpeta donde clonaste el repo
 ```
 Crea un archivo `.env` en la carpeta `Backend` con las siguientes variables:
 
