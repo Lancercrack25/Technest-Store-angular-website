@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { pool } from './db.js';
 import { initDatabase } from './init.js';
+import { analizarCompatibilidad } from './Gemini_api.js';
 
 const app = express();
 app.use(cors());
@@ -316,6 +317,17 @@ app.post('/admin/login', (req, res) => {
   } else {
     res.status(401).json({ error: 'Credenciales incorrectas' });
   }
+});
+
+// NUEVA RUTA DEL VALIDADOR
+app.post('/api/validar', async (req, res) => {
+    try {
+        const resultado = await analizarCompatibilidad(req.body);
+        // Enviamos el objeto directo para que Angular no tenga que buscarlo
+        res.json(resultado); 
+    } catch (error) {
+        res.status(500).json({ error: "Error en el servidor" });
+    }
 });
 
 // ==================== SERVER ====================
