@@ -1,5 +1,5 @@
 # Technest Store website
-
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d6f90f0c-6697-4397-9de9-cd688fd6b362" />
 Tienda en línea especializada en hardware y componentes de alto rendimiento para computadoras. Construida con Angular en el frontend y Node.js + PostgreSQL en el backend.
 
 ---
@@ -70,11 +70,16 @@ technest-store/
 ## 📱 Secciones del Cliente
 
 ### Autenticación
+
+<video src="https://github.com/user-attachments/assets/45880ea9-a7b9-4253-8955-29c838e06b83" autoplay muted loop playsinline width="620" height="680></video>
+
 - **Login** — Inicio de sesión con nombre de usuario y contraseña. Incluye acceso rápido al panel admin con `Ctrl + L`.
 - **Registro** — Formulario para crear una nueva cuenta de cliente.
 - **¿Olvidaste tu cuenta?** — Sección para recuperación de acceso.
 
 ### Una vez logueado
+
+<video src="https://github.com/user-attachments/assets/8a18506d-a8fb-4d45-b794-62bd9b330812" autoplay muted loop playsinline width="620" height="680></video>
 
 - **Inicio** — Página principal con información de la tienda y categorías destacadas.
 
@@ -101,6 +106,8 @@ technest-store/
 ---
 
 ## 🔐 Panel de Administración
+
+<video src="https://github.com/user-attachments/assets/b3c83432-6475-4962-b941-6193ecc9b86e" autoplay muted loop playsinline width="620" height="680></video>
 
 ### Acceso
 El panel admin se accede desde `/admin/login`. Las credenciales se configuran en el archivo `.env` del backend con las variables `AD_NAME` y `AD_PASSWORD`.
