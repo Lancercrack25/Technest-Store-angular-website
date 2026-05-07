@@ -1,30 +1,33 @@
 .pedidos-container {
-  background-color: #0a0a0a;
-  color: #e0e0e0;
-  padding: 2rem;
-  min-height: 80vh;
+  background: #020617;
+  color: #e2e8f0;
+  padding: 40px 6%;
+  min-height: 100vh;
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 .title {
-  color: #fff;
-  font-size: 1.5rem;
-  letter-spacing: 3px;
-  margin-bottom: 2rem;
-  border-left: 4px solid #ff0000;
-  padding-left: 15px;
+  color: white;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 35px;
+  background: linear-gradient(90deg, #22d3ee, #e01178);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .accent {
-  color: #ff0000;
-  animation: blink 1s infinite;
+  color: #22d3ee;
+  animation: blink 1.2s infinite;
 }
 
 .table-wrapper {
-  background: rgba(20, 20, 20, 0.8);
-  border: 1px solid #333;
-  border-radius: 4px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
   overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 .stealth-table {
@@ -34,53 +37,102 @@
 }
 
 .stealth-table th {
-  background-color: #1a1a1a;
-  color: #ff0000;
-  padding: 15px;
-  font-size: 0.8rem;
+  background: rgba(34, 211, 238, 0.08);
+  color: #22d3ee;
+  padding: 14px 18px;
+  font-size: 12px;
+  font-weight: 600;
   text-transform: uppercase;
-  border-bottom: 2px solid #333;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .stealth-table td {
-  padding: 15px;
-  border-bottom: 1px solid #222;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: #cbd5e1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: 0.2s;
+}
+
+.stealth-table tbody tr:hover td {
+  background: rgba(34, 211, 238, 0.04);
+}
+
+.stealth-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .order-id {
-  color: #ff0000;
-  font-weight: bold;
+  color: #22d3ee;
+  font-weight: 700;
 }
 
 .row-cancelled {
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .status-badge {
-  padding: 4px 8px;
-  border-radius: 2px;
-  font-size: 0.75rem;
-  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
 }
 
-.status-badge[data-status="Pendiente"] { background: #ffaa0033; color: #ffaa00; border: 1px solid #ffaa00; }
-.status-badge[data-status="Enviado"] { background: #00ffaa33; color: #00ffaa; border: 1px solid #00ffaa; }
-.status-badge[data-status="Cancelado"] { background: #ff000033; color: #ff0000; border: 1px solid #ff0000; }
+.status-badge[data-status="Pendiente"] {
+  background: rgba(250, 204, 21, 0.12);
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.3);
+}
+
+.status-badge[data-status="Enviado"] {
+  background: rgba(34, 211, 238, 0.12);
+  color: #22d3ee;
+  border: 1px solid rgba(34, 211, 238, 0.3);
+}
+
+.status-badge[data-status="Completada"] {
+  background: rgba(74, 222, 128, 0.12);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.status-badge[data-status="Cancelado"] {
+  background: rgba(248, 113, 113, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
 
 .btn-cancel {
-  background: transparent;
-  color: #ff0000;
-  border: 1px solid #ff0000;
-  padding: 5px 10px;
+  background: rgba(248, 113, 113, 0.08);
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  padding: 6px 14px;
+  border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 0.7rem;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .btn-cancel:hover {
-  background: #ff0000;
-  color: #fff;
-  box-shadow: 0 0 10px #ff0000;
+  background: rgba(248, 113, 113, 0.2);
+  border-color: #f87171;
+  box-shadow: 0 0 12px rgba(248, 113, 113, 0.2);
 }
 
-@keyframes blink { 50% { opacity: 0; } }
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .pedidos-container {
+    padding: 30px 5%;
+  }
+
+  .stealth-table th,
+  .stealth-table td {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}
