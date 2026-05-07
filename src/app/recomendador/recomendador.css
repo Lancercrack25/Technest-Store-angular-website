@@ -1,8 +1,8 @@
 /* Contenedor Principal */
 .validator-container {
-    background-color: #000000;
+    background-color:#111111;
     min-height: 100vh;
-    padding: 40px 20px;
+    padding: 102px 35px;
     display: flex;
     justify-content: center;
 }

@@ -1,12 +1,13 @@
 import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { IaService } from '../services/ia';
+import { IaService } from '../services/user.service';
+import { Navbar } from "../navbar/navbar";
 
 @Component({
   selector: 'app-recomendador',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, Navbar],
   templateUrl: './recomendador.html',
   styleUrl: './recomendador.css',
 })

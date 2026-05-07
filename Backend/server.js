@@ -319,7 +319,7 @@ app.post('/admin/login', (req, res) => {
   }
 });
 
-// NUEVA RUTA DEL VALIDADOR
+// NUEVA RUTA DEL VALIDADOR para el componente de recomendador, esta ruta recibe un objeto con las partes seleccionadas por el usuario y devuelve un objeto con la compatibilidad y recomendaciones
 app.post('/api/validar', async (req, res) => {
     try {
         const resultado = await analizarCompatibilidad(req.body);

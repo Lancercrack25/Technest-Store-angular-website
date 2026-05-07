@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import dotenv from 'dotenv';
-
+// Configuración de variables de entorno
 dotenv.config();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -21,11 +21,11 @@ export async function analizarCompatibilidad(componentes) {
         const text = response.text().replace(/```json|```/g, "").trim();
         
         const jsonFinal = JSON.parse(text);
-        console.log("✅ Análisis enviado al frontend:", jsonFinal);
+        console.log(" Análisis enviado al frontend:", jsonFinal);
         return jsonFinal;
 
     } catch (error) {
-        console.error("❌ Error en la IA:", error);
+        console.error(" Error en la IA:", error);
         throw error;
     }
 }

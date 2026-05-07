@@ -54,4 +54,18 @@ export class CarritoService {
   }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+export class IaService {
+  // La ruta de tu backend en Node
+  private apiUrl = 'http://localhost:3000/api/validar';
+
+  constructor(private http: HttpClient) { }
+
+  validarCompatibilidad(piezas: any): Observable<any> {
+    return this.http.post(this.apiUrl, piezas);
+  }
+}
+
 //en este archivo se podran manejar los services de diferentes componentes
