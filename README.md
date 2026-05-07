@@ -1,4 +1,193 @@
 # Technest Store website
+<img width="1936" height="960" alt="image" src="https://github.com/user-attachments/assets/06aabf0d-9242-44a5-a351-f813450a9fcb" />
+
+Tienda en línea especializada en hardware y componentes de alto rendimiento para computadoras. Construida con Angular en el frontend y Node.js + PostgreSQL en el backend.
+
+---
+
+## 🚀 Instalación
+
+### Requisitos previos
+
+- Node.js 18+
+- PostgreSQL 14+
+- Angular CLI 17+
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/Lancercrack25/Technest-Store-angular-website.git
+cd nombre de la ruta donde tienes carpeta donde clonaste el repo
+```
+Crea un archivo `.env` en la carpeta `Backend` con las siguientes variables:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=tu_password
+AD_NAME=NombreAdmin
+AD_PASSWORD=tu_password_admin
+PORT=3000
+```
+El backend corre en `http://localhost:3000` y crea las tablas automáticamente al iniciar.
+La aplicación abre en `http://localhost:4200`.
+
+## 🗂️ Estructura del Proyecto
+
+```
+technest-store/
+├── Backend/
+│   ├── server.js         # Servidor Express y endpoints REST
+│   ├── db.js             # Configuración de conexión a PostgreSQL
+│   ├── init.js           # Creación automática de tablas
+│   ├── Gemini_api.js     #archivo que se encarga de manejar la api de gemini para cierto componente
+│   └── .env              # Variables de entorno (no subir a git)
+├── src/
+│   └── app/
+│       ├── login/
+│       ├── registro/
+│       ├── forgot-password/
+│       ├── inicio/
+│       ├── navbar/
+│       ├── footer/
+│       ├── productos/
+│       ├── carrito/
+│       ├── recomendador/
+│       ├── pedidos/
+│       ├── cliente-perfil/
+│       ├── admin-login/
+│       ├── admin-panel/
+│       ├── registro-productos/
+│       ├── registro-provedores/
+│       ├── categoria-registro/
+│       ├── provedores/
+│       ├── clientes/
+│       └── ventas/
+└── README.md
+```
+
+---
+
+## 📱 Secciones del Cliente
+
+### Autenticación
+
+https://github.com/user-attachments/assets/45880ea9-a7b9-4253-8955-29c838e06b83
+
+- **Login** — Inicio de sesión con nombre de usuario y contraseña. Incluye acceso rápido al panel admin con `Ctrl + L`.
+- **Registro** — Formulario para crear una nueva cuenta de cliente.
+- **¿Olvidaste tu cuenta?** — Sección para recuperación de acceso.
+
+### Una vez logueado
+
+https://github.com/user-attachments/assets/8a18506d-a8fb-4d45-b794-62bd9b330812
+
+- **Inicio** — Página principal con información de la tienda y categorías destacadas.
+
+- **Navbar** — Barra de navegación fija con acceso a:
+  - Productos
+  - Carrito
+  - Recomendador de Piezas
+  - Mis Pedidos
+  - Foto de perfil con menú desplegable
+
+- **Productos** — Catálogo completo de productos disponibles con imagen, precio y descripción.
+
+- **Carrito** — Gestión de productos seleccionados antes de comprar.
+
+- **Recomendador de Piezas** — Herramienta impulsada por IA (Gemini) para recomendar componentes según las necesidades del usuario.
+
+- **Mis Pedidos** — Historial de compras realizadas por el cliente.
+
+- **Perfil** — Sección accesible desde la foto del navbar donde el cliente puede:
+  - Ver y editar sus datos personales (nombre, email, teléfono)
+  - Cambiar su foto de perfil
+  - Cerrar sesión
+
+---
+
+## 🔐 Panel de Administración
+
+https://github.com/user-attachments/assets/b3c83432-6475-4962-b941-6193ecc9b86e
+
+### Acceso
+El panel admin se accede desde `/admin/login`. Las credenciales se configuran en el archivo `.env` del backend con las variables `AD_NAME` y `AD_PASSWORD`.
+
+### Secciones del Panel
+
+- **Registro de Productos** — Formulario para agregar nuevos productos al catálogo con nombre, precio, costo, descripción, garantía, categoría, proveedor e imagen.
+
+- **Registro de Proveedores** — Alta de nuevos proveedores con razón social, RFC, contacto, email y teléfono.
+
+- **Registro de Categorías** — Creación de categorías para organizar los productos del catálogo.
+
+- **Ver Proveedores** — Tabla con todos los proveedores registrados, con opción de eliminar.
+
+- **Ver Clientes** — Lista completa de clientes registrados en el sistema con opción de eliminar.
+
+- **Ver Pedidos** — Historial de todos los pedidos realizados en la tienda.
+
+- **Ver Ventas** — Registro de todas las ventas con detalles de monto, estado y método de pago.
+
+- **Salir** — Cierra la sesión del administrador y regresa al login.
+
+---
+
+## 🗄️ Base de Datos
+
+El proyecto usa PostgreSQL con las siguientes tablas principales:
+
+| Tabla | Descripción |
+|-------|-------------|
+| `cliente` | Clientes registrados |
+| `categoria` | Categorías de productos |
+| `proveedor` | Proveedores del sistema |
+| `producto` | Catálogo de productos |
+| `carrito` | Carritos activos |
+| `carrito_detalle` | Productos en el carrito |
+| `venta` | Ventas realizadas |
+| `detalle_venta` | Productos por venta |
+| `pago` | Pagos registrados |
+| `envio` | Información de envíos |
+| `factura` | Facturas generadas |
+
+---
+
+## 🛠️ Tecnologías
+
+| Área | Tecnología |
+|------|-----------|
+| Frontend | Angular 17+ |
+| Backend | Node.js + Express |
+| Base de datos | PostgreSQL |
+| Estilos | CSS personalizado |
+| Alertas | SweetAlert2 |
+| IA | Google Gemini API |
+
+---
+
+## 📝 Variables de Entorno
+
+| Variable | Descripción |
+|----------|-------------|
+| `DB_HOST` | Host de PostgreSQL |
+| `DB_PORT` | Puerto de PostgreSQL (default 5432) |
+| `DB_USER` | Usuario de PostgreSQL |
+| `DB_PASSWORD` | Contraseña de PostgreSQL |
+| `AD_NAME` | Nombre del administrador |
+| `AD_PASSWORD` | Contraseña del administrador |
+| `PORT` | Puerto del backend (default 3000) |
+| `GEMINI_API_KEY` | Clave de la API de Google Gemini |
+
+---
+
+## ⚠️ Notas importantes
+
+- El archivo `.env` nunca debe subirse al repositorio. Agrégalo al `.gitignore`.
+- Las tablas se crean automáticamente al iniciar el backend por primera vez.
+- La imagen de perfil y de productos se almacena en base64 directamente en PostgreSQL.
+
 <h2 style="font-size: 36px; margin-top: 40px;">Instalación</h2>
 
 <strong>Para poder instalar correctamente este proyecto debes de tener instalado node.js, npm y angular</strong>
