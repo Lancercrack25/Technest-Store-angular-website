@@ -33,6 +33,7 @@ import { Provedores } from './provedores/provedores';
 import { BarraBusqueda } from './barra-busqueda/barra-busqueda';
 import { MenuCategorias } from './menu-categorias/menu-categorias';
 import { CategoriaRegistro } from './categoria-registro/categoria-registro';
+import { Envios } from './envios/envios';
 
 
 export const routes: Routes = [
@@ -70,5 +71,6 @@ export const routes: Routes = [
   { path: 'provedores', component: Provedores},
   { path: 'barra-busqueda', component: BarraBusqueda},
   { path: 'menu-categorias', component: MenuCategorias},
-  { path: 'categoria-registro', component: CategoriaRegistro}
+  { path: 'categoria-registro', component: CategoriaRegistro},
+  { path: 'envios', component: Envios},
 ];
