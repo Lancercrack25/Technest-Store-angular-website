@@ -1,1 +1,50 @@
-<p>recomendador works!</p>
+<div class="validator-container">
+  <div class="validator-card">
+    <h2>VALIDADOR DE HARDWARE <span class="ia-accent">IA</span></h2>
+    <p class="subtitle">Ingresa tus componentes para analizar compatibilidad y cuellos de botella.</p>
+
+    <div class="form-group">
+      <label>Procesador (CPU)</label>
+      <input type="text" [(ngModel)]="hardware.cpu" placeholder="Ej: AMD Ryzen 7 5700X">
+    </div>
+
+    <div class="form-group">
+      <label>Tarjeta Gráfica (GPU)</label>
+      <input type="text" [(ngModel)]="hardware.gpu" placeholder="Ej: NVIDIA RTX 5060">
+    </div>
+
+    <div class="form-group">
+      <label>Tarjeta Madre (Motherboard)</label>
+      <input type="text" [(ngModel)]="hardware.mobo" placeholder="Ej: B550M DS3H">
+    </div>
+
+    <div class="form-group">
+      <label>Memoria RAM</label>
+      <input type="text" [(ngModel)]="hardware.ram" placeholder="Ej: 16GB DDR4">
+    </div>
+
+    <button class="btn-analizar" (click)="validarEnsamblaje()" [disabled]="cargando">
+      {{ cargando ? 'ANALIZANDO...' : 'ANALIZAR ENSAMBLAJE' }}
+    </button>
+
+    <!-- Sección de Diagnóstico Ordenado -->
+    <div *ngIf="resultadoAnalisis && !cargando" class="diagnostico-container">
+      <div class="header-reporte">
+        <span class="label">ESTADO DEL SISTEMA:</span>
+        <span [class]="resultadoAnalisis.compatible ? 'status-ok' : 'status-error'">
+          {{ resultadoAnalisis.compatible ? '● COMPATIBLE' : '● INCOMPATIBLE' }}
+        </span>
+      </div>
+
+      <div class="seccion-reporte">
+        <div class="sub-label">ANÁLISIS TÉCNICO</div>
+        <div class="contenido-texto">{{ resultadoAnalisis.detalles }}</div>
+      </div>
+
+      <div class="seccion-reporte">
+        <div class="sub-label">CUELLO DE BOTELLA</div>
+        <div class="contenido-texto highlight">{{ resultadoAnalisis.cuello_de_botella }}</div>
+      </div>
+    </div>
+  </div>
+</div>

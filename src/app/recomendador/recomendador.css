@@ -1,0 +1,124 @@
+/* Contenedor Principal */
+.validator-container {
+    background-color: #000000;
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.validator-card {
+    background-color: #0a0a0a;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+}
+
+h2 {
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.ia-accent { color: #ff0000; }
+
+.subtitle {
+    color: #555555;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+}
+
+/* Formulario */
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    color: #ff0000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    background-color: #121212;
+    border: 1px solid #222222;
+    padding: 12px;
+    color: #00ff41; /* Verde Matrix para inputs */
+    font-family: 'Consolas', monospace;
+    border-radius: 4px;
+    outline: none;
+}
+
+input:focus { border-color: #ff0000; }
+
+/* Botón Rojo */
+.btn-analizar {
+    width: 100%;
+    background-color: #ff0000;
+    color: #000000;
+    border: none;
+    padding: 15px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-analizar:hover {
+    background-color: #cc0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+.btn-analizar:disabled {
+    background-color: #333333;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+/* Reporte de Diagnóstico */
+.diagnostico-container {
+    background-color: #000000;
+    border: 1px solid #1a1a1a;
+    border-left: 5px solid #ff0000;
+    padding: 20px;
+    margin-top: 25px;
+    font-family: 'Roboto Mono', 'Consolas', monospace;
+    color: #ffffff;
+}
+
+.label { color: #555555; font-size: 0.7rem; font-weight: bold; letter-spacing: 2px; }
+
+.status-ok { color: #00ff41; font-weight: bold; margin-left: 10px; }
+.status-error { color: #ff0000; font-weight: bold; margin-left: 10px; }
+
+.seccion-reporte {
+    margin-top: 15px;
+    border-top: 1px solid #1a1a1a;
+    padding-top: 10px;
+}
+
+.sub-label {
+    color: #ff0000;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.contenido-texto {
+    white-space: pre-wrap; /* Esto respeta los guiones y saltos de línea de la IA */
+    color: #ffffff;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.highlight { background: rgba(255, 0, 0, 0.05); padding: 4px; }
