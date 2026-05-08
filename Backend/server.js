@@ -268,6 +268,56 @@ app.post('/ventas', async (req, res) => {
   }
 });
 
+//endpoint para esto de los pedidos
+app.get('/pedidos/:idCliente', async (req, res) => {
+  try {
+    const r = await pool.query(`
+      SELECT 
+        v.id_venta,
+        v.fecha,
+        v.total,
+        v.estado,
+        v.canal,
+        e.estado AS estado_envio,
+        e.transportista,
+        e.num_guia,
+        json_agg(json_build_object(
+          'nombre', p.nombre,
+          'cantidad', dv.cantidad,
+          'precio_unitario', dv.precio_unitario,
+          'subtotal', dv.subtotal
+        )) AS productos
+      FROM venta v
+      LEFT JOIN detalle_venta dv ON v.id_venta = dv.id_venta
+      LEFT JOIN producto p ON dv.id_producto = p.id_producto
+      LEFT JOIN envio e ON v.id_venta = e.id_venta
+      WHERE v.id_cliente = $1
+      GROUP BY v.id_venta, v.fecha, v.total, v.estado, v.canal, e.estado, e.transportista, e.num_guia
+      ORDER BY v.fecha DESC
+    `, [req.params.idCliente]);
+    res.json(r.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+//===================== ENVÍOS ====================
+app.get('/envios', async (_, res) => {
+  try {
+    const r = await pool.query(`
+      SELECT e.*, v.total, c.nombre AS cliente
+      FROM envio e
+      LEFT JOIN venta v ON e.id_venta = v.id_venta
+      LEFT JOIN cliente c ON v.id_cliente = c.id_cliente
+      ORDER BY e.fecha_envio DESC
+    `);
+    res.json(r.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // ==================== LOGIN ====================
 app.post('/login', async (req, res) => {
 

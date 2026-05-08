@@ -146,3 +146,11 @@ body {
     background-position: center;
     background-attachment: fixed;
 }
+
+.envios {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('assets/images/fondos.webp') center / cover no-repeat;
+}

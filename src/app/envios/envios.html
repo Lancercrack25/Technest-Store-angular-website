@@ -1,1 +1,56 @@
-<p>envios works!</p>
+<main class="envios-container">
+
+  <div class="envios-header">
+    <div>
+      <h1>Envíos</h1>
+      <p>Seguimiento de todos los envíos registrados</p>
+    </div>
+    <button class="btn-volver" routerLink="/admin/panel">← Volver al Panel</button>
+  </div>
+
+  @if (cargando) {
+    <div class="loading">Cargando envíos...</div>
+  }
+
+  @if (cargado && envios.length === 0) {
+    <div class="empty">No hay envíos registrados</div>
+  }
+
+  @if (cargado && envios.length > 0) {
+    <div class="tabla-wrapper">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>ID Envío</th>
+            <th>ID Venta</th>
+            <th>Cliente</th>
+            <th>Transportista</th>
+            <th>Num. Guía</th>
+            <th>Dirección</th>
+            <th>Fecha Envío</th>
+            <th>Fecha Entrega</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (e of envios; track $index) {
+            <tr>
+              <td class="envio-id">{{ e.id_envio }}</td>
+              <td class="venta-id">{{ e.id_venta }}</td>
+              <td>{{ e.cliente }}</td>
+              <td>{{ e.transportista }}</td>
+              <td>{{ e.num_guia }}</td>
+              <td class="direccion">{{ e.direccion_destino }}</td>
+              <td>{{ formatearFecha(e.fecha_envio) }}</td>
+              <td>{{ formatearFecha(e.fecha_entrega) }}</td>
+              <td>
+                <span class="badge" [attr.data-status]="e.estado">{{ e.estado }}</span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+</main>
