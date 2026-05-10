@@ -286,9 +286,11 @@ Qué hace:
 **Segunda nota importante**:en el caso de clonar este repositorio y que te marque error al querer ejecutar el poryecto ya sea desde el front end deberas ejecuar el siguiente comando:
 <pre style="background:#f5f5f5; padding: 10px; border-radius: 5px;">
 npm install
+npm install chart.js
 </pre>
 
 en caso de que el backend no este funcionando deberas acceder primero a la carpeta backend y despues una vez dentro de la carpeta deberas ejecutar lo siguiente:
 <pre style="background:#f5f5f5; padding: 10px; border-radius: 5px;">
 npm install pg dotenv
+npm install @google/generative-ai
 </pre>
