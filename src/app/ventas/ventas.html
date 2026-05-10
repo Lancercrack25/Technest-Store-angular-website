@@ -1,1 +1,88 @@
-<p>ventas works!</p>
+<main class="ventas-container">
+
+  <div class="ventas-header">
+    <div>
+      <h1>Ventas</h1>
+      <p>Historial de todas las ventas realizadas</p>
+    </div>
+    <div class="header-btns">
+      <button class="btn-volver" routerLink="/admin/panel">← Volver al Panel</button>
+    </div>
+  </div>
+
+  @if (cargando) {
+    <div class="loading">Cargando ventas...</div>
+  }
+
+  @if (cargado && ventas.length === 0) {
+    <div class="empty">No hay ventas registradas</div>
+  }
+
+  @if (cargado && ventas.length > 0) {
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <p class="stat-label">Total ventas</p>
+        <p class="stat-value">{{ ventas.length }}</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Ingresos totales</p>
+        <p class="stat-value">{{ formatearMonto(totalIngresos) }}</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Promedio por venta</p>
+        <p class="stat-value">{{ formatearMonto(promedioVenta) }}</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Completadas</p>
+        <p class="stat-value verde">{{ ventasCompletadas }}</p>
+      </div>
+    </div>
+
+    <div class="graficas-row">
+      <div class="grafica-card">
+        <h3>Ingresos por fecha</h3>
+        <canvas id="graficaLinea"></canvas>
+      </div>
+      <div class="grafica-card small">
+        <h3>Estado de ventas</h3>
+        <canvas id="graficaDona"></canvas>
+      </div>
+    </div>
+
+    <div class="tabla-wrapper">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>ID Venta</th>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Subtotal</th>
+            <th>Impuestos</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Canal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (v of ventas; track $index) {
+            <tr>
+              <td class="venta-id">{{ v.id_venta }}</td>
+              <td>{{ v.cliente }}</td>
+              <td>{{ formatearFecha(v.fecha) }}</td>
+              <td>{{ formatearMonto(v.subtotal) }}</td>
+              <td>{{ formatearMonto(v.impuestos) }}</td>
+              <td class="total">{{ formatearMonto(v.total) }}</td>
+              <td>
+                <span class="badge" [attr.data-status]="v.estado">{{ v.estado }}</span>
+              </td>
+              <td>{{ v.canal }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+  }
+
+</main>

@@ -143,15 +143,6 @@ app.get('/productos', async (_, res) => {
 });
 
 app.post('/productos', async (req, res) => {
-  const { numero_de_serie, nombre, descripcion, precio, costo, garantia_meses, id_categoria, id_proveedor } = req.body;
-  const r = await pool.query(`
-    INSERT INTO producto (numero_de_serie,nombre,descripcion,precio,costo,garantia_meses,id_categoria,id_proveedor,activo)
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,true) RETURNING *
-  `, [numero_de_serie, nombre, descripcion, precio, costo, garantia_meses, id_categoria, id_proveedor]);
-  res.json(r.rows[0]);
-});
-
-app.post('/productos', async (req, res) => {
   const { numero_de_serie, nombre, descripcion, precio, costo, garantia_meses, id_categoria, id_proveedor, imagen } = req.body;
   const id = 'PROD' + Date.now().toString().slice(-4);
   try {

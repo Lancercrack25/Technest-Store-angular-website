@@ -154,3 +154,12 @@ body {
     align-items: center;
     background: url('assets/images/fondos.webp') center / cover no-repeat;
 }
+
+.ventas {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('assets/images/other.webp') center / cover no-repeat;
+
+}
