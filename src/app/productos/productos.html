@@ -1,2 +1,10 @@
 <app-navbars></app-navbars>
 <p>productos works!</p>
+
+@for (producto of productos; track producto.id_producto) {
+    <div>
+    <h2>{{ producto.nombre }}</h2>
+    <p>{{ producto.descripcion }}</p>
+    <p>$ {{ producto.precio }}</p>
+    </div>
+}
