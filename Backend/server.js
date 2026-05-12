@@ -42,13 +42,37 @@ app.get('/cliente', async (_, res) => {
   res.json(r.rows);
 });
 
-app.post('/cliente', async (req, res) => {
+/*app.post('/cliente', async (req, res) => {
   const { nombre, email, password, telefono, rol } = req.body;
   const r = await pool.query(`
     INSERT INTO cliente (nombre,email,password,telefono,rol,creado_en)
     VALUES ($1,$2,$3,$4,$5,NOW()) RETURNING *
   `, [nombre, email, password, telefono, rol || 'cliente']);
   res.json(r.rows[0]);
+});*/
+
+app.post('/cliente', async (req, res) => {
+  try {
+
+    console.log(req.body);
+
+    const { nombre, email, password, telefono, rol } = req.body;
+
+    const r = await pool.query(`
+      INSERT INTO cliente (nombre,email,password,telefono,rol,creado_en)
+      VALUES ($1,$2,$3,$4,$5,NOW()) RETURNING *
+    `, [nombre, email, password, telefono, rol || 'cliente']);
+
+    res.json(r.rows[0]);
+
+  } catch (error) {
+
+    console.error("ERROR REGISTRO:", error);
+
+    res.status(500).json({
+      error: error.message
+    });
+  }
 });
 
 app.put('/cliente/:id', async (req, res) => {
