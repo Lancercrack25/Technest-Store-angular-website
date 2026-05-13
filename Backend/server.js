@@ -199,14 +199,34 @@ app.delete('/productos/:id', async (req, res) => {
 
 // ==================== CARRITO ====================
 app.get('/carrito/:idCliente', async (req, res) => {
-  const r = await pool.query(`
+  /*const r = await pool.query(`
     SELECT cd.*, p.nombre, p.precio
     FROM carrito_detalle cd
     JOIN producto p ON cd.id_producto = p.id_producto
     WHERE cd.id_carrito = (
       SELECT id_carrito FROM carrito WHERE id_cliente = $1 AND estado = 'Activo'
     )
-  `, [req.params.idCliente]);
+  `, [req.params.idCliente]);*/
+
+  const r = await pool.query(`
+  SELECT 
+    cd.id_detalle,
+    cd.id_carrito,
+    cd.id_producto,
+    cd.cantidad,
+    cd.precio_unitario AS precio,
+    (cd.cantidad * cd.precio_unitario) AS subtotal,
+    p.nombre
+  FROM carrito_detalle cd
+  JOIN producto p ON cd.id_producto = p.id_producto
+  WHERE cd.id_carrito = (
+    SELECT id_carrito
+    FROM carrito
+    WHERE id_cliente = $1
+    AND estado = 'Activo'
+  )
+`, [req.params.idCliente]);
+
   res.json(r.rows);
 });
 

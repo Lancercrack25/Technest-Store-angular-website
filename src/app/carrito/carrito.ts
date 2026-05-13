@@ -18,7 +18,8 @@ export class Carrito implements OnInit {
   subtotal: number = 0;
   impuestos: number = 0;
 
-  idClientePrueba: number = 1;
+  cliente: any;
+
 
   // Campos del formulario de pago
   nombreTitular: string = '';
@@ -53,18 +54,44 @@ export class Carrito implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    this.cliente = JSON.parse(localStorage.getItem('cliente') || '{}');
+
+    console.log(this.cliente);
+
     this.cargarCarrito();
+
     this.generarFolio();
   }
+  
 
   cargarCarrito() {
-    this.carritoService.obtenerCarrito(this.idClientePrueba).subscribe({
-      next: (datosDelBackend) => {
+    this.carritoService.obtenerCarrito(this.cliente.id_cliente).subscribe({
+    
+      /*next: (datosDelBackend) => {
         this.itemsCarrito = datosDelBackend;
         this.subtotal = this.itemsCarrito.reduce((suma, item) => suma + Number(item.subtotal), 0);
         this.impuestos = this.subtotal * 0.16;
         this.total = this.subtotal + this.impuestos;
-      },
+      },*/
+
+    next: (datosDelBackend: any) => {
+
+      console.log(datosDelBackend);
+
+      this.itemsCarrito = [...datosDelBackend];
+
+      this.subtotal = this.itemsCarrito.reduce(
+        (suma, item) => suma + Number(item.subtotal),
+        0
+      );
+
+      this.impuestos = this.subtotal * 0.16;
+
+      this.total = this.subtotal + this.impuestos;
+
+    },
+
       error: (err) => {
         console.error('Error al cargar el carrito:', err);
       }

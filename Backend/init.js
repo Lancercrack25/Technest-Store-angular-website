@@ -5,6 +5,7 @@ const { Pool } = pkg;
 
 export async function initDatabase() {
   try {
+    
     console.log('Inicializando base de datos...');
 
     const res = await adminPool.query(
@@ -13,18 +14,20 @@ export async function initDatabase() {
 
     if (res.rowCount === 0) {
       await adminPool.query('CREATE DATABASE tienda_pc');
-      console.log('Base de datos creada');
     }
 
     await adminPool.end();
 
     const pool = new Pool({
+      
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: 'tienda_pc',
     });
+
+    await pool.query('CREATE EXTENSION IF NOT EXISTS "pgcrypto";');
 
     // ================= CLIENTE =================
     await pool.query(`

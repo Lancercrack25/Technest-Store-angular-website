@@ -26,7 +26,7 @@ export class Productos implements OnInit{
     .subscribe({
 
       next: (data) => {
-        this.productos = data;
+        this.productos = [...data];
         console.log(data);
       },
 
