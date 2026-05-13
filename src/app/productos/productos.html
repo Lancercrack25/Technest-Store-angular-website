@@ -1,10 +1,33 @@
 <app-navbars></app-navbars>
-<p>productos works!</p>
 
-@for (producto of productos; track producto.id_producto) {
-    <div>
-    <h2>{{ producto.nombre }}</h2>
-    <p>{{ producto.descripcion }}</p>
-    <p>$ {{ producto.precio }}</p>
+<div class="contenedor-productos">
+
+    @for (producto of productos; track producto.id_producto) {
+
+    <div class="card-producto">
+
+        <img
+            [src]="producto.imagen"
+            alt="Producto"
+            class="imagen-producto"
+        />
+
+        <h2>{{ producto.nombre }}</h2>
+
+        <p class="descripcion">
+        {{ producto.descripcion }}
+        </p>
+
+        <p class="precio">
+        $ {{ producto.precio }}
+        </p>
+
+        <button>
+        Agregar al carrito
+        </button>
+
     </div>
-}
+
+    }
+
+</div>

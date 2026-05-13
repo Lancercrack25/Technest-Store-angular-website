@@ -11,9 +11,9 @@ export async function analizarCompatibilidad(componentes) {
         const prompt = `Analiza este hardware: ${JSON.stringify(componentes)}.
         Responde ÚNICAMENTE con este JSON exacto (sin texto adicional):
         {
-          "compatible": true,
-          "detalles": "- Punto 1\\n- Punto 2",
-          "cuello_de_botella": "Análisis de rendimiento"
+            "compatible": true,
+            "detalles": "- Punto 1\\n- Punto 2",
+            "cuello_de_botella": "Análisis de rendimiento"
         }`;
 
         const result = await model.generateContent(prompt);
