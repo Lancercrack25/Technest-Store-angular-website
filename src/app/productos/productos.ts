@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Navbar } from "../navbar/navbar";
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './productos.html',
   styleUrl: './productos.css',
 })
-export class Productos {
+export class Productos implements OnInit{
   
   productos: any[] = [];
 

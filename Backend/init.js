@@ -86,7 +86,7 @@ export async function initDatabase() {
     // ================= CARRITO =================
     await pool.query(`
       CREATE TABLE IF NOT EXISTS carrito (
-        id_carrito VARCHAR(10) PRIMARY KEY,
+        id_carrito TEXT PRIMARY KEY,
         id_cliente INT UNIQUE,
         creado_en TIMESTAMP,
         estado VARCHAR(20),
@@ -98,7 +98,7 @@ export async function initDatabase() {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS carrito_detalle (
         id_detalle SERIAL PRIMARY KEY,
-        id_carrito VARCHAR(10),
+        id_carrito TEXT,
         id_producto VARCHAR(10),
         cantidad INT,
         precio_unitario NUMERIC(10,2),
@@ -110,7 +110,7 @@ export async function initDatabase() {
     // ================= VENTA =================
     await pool.query(`
       CREATE TABLE IF NOT EXISTS venta (
-        id_venta VARCHAR(10) PRIMARY KEY,
+        id_venta TEXT PRIMARY KEY,
         id_cliente INT,
         fecha TIMESTAMP,
         subtotal NUMERIC(10,2),
@@ -127,7 +127,7 @@ export async function initDatabase() {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS detalle_venta (
         id_detalle SERIAL PRIMARY KEY,
-        id_venta VARCHAR(10),
+        id_venta TEXT,
         id_producto VARCHAR(10),
         cantidad INT,
         precio_unitario NUMERIC(10,2),
@@ -141,8 +141,8 @@ export async function initDatabase() {
     // ================= PAGO =================
     await pool.query(`
       CREATE TABLE IF NOT EXISTS pago (
-        id_pago VARCHAR(10) PRIMARY KEY,
-        id_venta VARCHAR(10),
+        id_pago TEXT PRIMARY KEY,
+        id_venta TEXT,
         monto NUMERIC(10,2),
         metodo_pago VARCHAR(50),
         referencia VARCHAR(100),
