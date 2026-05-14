@@ -1,8 +1,20 @@
 <app-navbars></app-navbars>
 
+<div class="busqueda-container">
+
+    <input
+        type="text"
+        placeholder="Buscar productos..."
+        [(ngModel)]="busqueda"
+        (input)="filtrarProductos()"
+        class="input-busqueda"
+    />
+
+</div>
+
 <div class="contenedor-productos">
 
-    @for (producto of productos; track producto.id_producto) {
+    @for (producto of productosFiltrados; track producto.id_producto) {
 
     <div class="card-producto">
 
@@ -15,15 +27,15 @@
         <h2>{{ producto.nombre }}</h2>
 
         <p class="descripcion">
-        {{ producto.descripcion }}
+            {{ producto.descripcion }}
         </p>
 
         <p class="precio">
-        $ {{ producto.precio }}
+            $ {{ producto.precio }}
         </p>
 
         <button (click)="agregarAlCarrito(producto)">
-        Agregar al carrito
+            Agregar al carrito
         </button>
 
     </div>

@@ -1,0 +1,25 @@
+.busqueda-container {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    margin: 20px 0;
+
+    }
+
+    .input-busqueda {
+
+    width: 60%;
+
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    border: 1px solid #ccc;
+
+    font-size: 16px;
+
+}
