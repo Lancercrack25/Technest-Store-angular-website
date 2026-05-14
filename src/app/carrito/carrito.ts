@@ -80,9 +80,7 @@ export class Carrito implements OnInit {
   calcularTotales() {
 
   this.subtotal = 0;
-
   for (let item of this.itemsCarrito) {
-
     this.subtotal += Number(item.subtotal);
 
   }
@@ -92,6 +90,13 @@ export class Carrito implements OnInit {
   this.total = Number((this.subtotal + this.impuestos).toFixed(2));
 
 }
+
+  eliminarItem(id_producto: any) {
+
+  this.cartService.removeItem(id_producto);
+
+}
+
   cargarCarrito() {
     this.carritoService.obtenerCarrito(this.cliente.id_cliente).subscribe({
     

@@ -2,34 +2,79 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CartService {
 
-    private cartItems = new BehaviorSubject<any[]>([]);
-    cartItems$ = this.cartItems.asObservable();
+  private carritoInicial: any[] = JSON.parse(
+    localStorage.getItem('carrito') || '[]'
+  );
 
-  // obtener valor actual
-    getItems() {
+  private cartItems = new BehaviorSubject<any[]>(this.carritoInicial);
+
+  cartItems$ = this.cartItems.asObservable();
+
+  constructor() {}
+
+  getItems() {
     return this.cartItems.value;
+  }
+
+  addItem(producto: any) {
+
+    const current = this.cartItems.value;
+
+    const productoExistente = current.find(
+      item => item.id_producto === producto.id_producto
+    );
+
+    if (productoExistente) {
+
+      productoExistente.cantidad += 1;
+
+      productoExistente.subtotal =
+        productoExistente.cantidad * Number(productoExistente.precio);
+
+    } else {
+
+      current.push({
+        ...producto,
+        cantidad: 1,
+        subtotal: Number(producto.precio)
+      });
+
     }
 
-  // agregar producto
-    addItem(producto: any) {
+    this.cartItems.next([...current]);
 
-  const current = this.cartItems.value;
+    localStorage.setItem(
+      'carrito',
+      JSON.stringify(this.cartItems.value)
+    );
 
-  const productoCarrito = {
-    ...producto,
-    cantidad: 1,
-    subtotal: producto.precio
-  };
+  }
 
-  this.cartItems.next([...current, productoCarrito]);
-}
+  removeItem(id_producto: any) {
 
-  // limpiar carrito
-    clearCart() {
+    const updated = this.cartItems.value.filter(
+      item => item.id_producto !== id_producto
+    );
+
+    this.cartItems.next(updated);
+
+    localStorage.setItem(
+      'carrito',
+      JSON.stringify(updated)
+    );
+
+  }
+
+  clearCart() {
+
     this.cartItems.next([]);
-    }
+
+    localStorage.removeItem('carrito');
+
+  }
+
 }

@@ -222,6 +222,7 @@
 
       <div *ngIf="itemsCarrito.length > 0" class="carrito-lleno">
         <ul class="lista-items">
+
           <li *ngFor="let item of itemsCarrito" class="item-fila">
             <div>
               <strong class="item-nombre">
@@ -230,10 +231,20 @@
               <p class="item-detalles">
                 Cantidad: {{ item.cantidad }} | Precio: ${{ item.precio }}
               </p>
+
+              <button
+                class="btn-eliminar"
+                (click)="eliminarItem(item.id_producto)">
+
+                Eliminar
+
+              </button>
+
             </div>
             <div class="item-subtotal">
               ${{ item.subtotal }}
             </div>
+            
           </li>
         </ul>
       </div>
