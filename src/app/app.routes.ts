@@ -22,7 +22,7 @@ import { BarraBusqueda } from './barra-busqueda/barra-busqueda';
 import { MenuCategorias } from './menu-categorias/menu-categorias';
 import { CategoriaRegistro } from './categoria-registro/categoria-registro';
 import { Envios } from './envios/envios';
-
+import { ProductosResolver } from './core/productos.resolver';
 
 export const routes: Routes = [
   { path: '', component: Login },
@@ -37,7 +37,14 @@ export const routes: Routes = [
   { path: 'admin/perfil', component: AdminPerfil },
   { path: 'cliente/perfil/:id', component: ClientePerfil },
   { path: 'carrito', component: Carrito},
-  { path: 'productos', component: Productos},
+  { 
+    path: 'productos',
+    component: Productos,
+    resolve: {
+      productos: ProductosResolver
+    }
+  },
+  
   { path: 'recomendador', component: Recomendador},
   { path: 'pedidos', component: Pedidos},
   { path: 'ventas', component: Ventas},
