@@ -3,6 +3,7 @@ import { Navbar } from "../navbar/navbar";
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from '../core/cart.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class Productos implements OnInit{
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private cartService: CartService
   ) {}
 
   /*constructor(
@@ -89,7 +91,11 @@ export class Productos implements OnInit{
           id_producto: producto.id_producto, // Ahora sí reconocerá 'producto'
           cantidad: 1
         }).subscribe({
+
           next: () => {
+
+            this.cartService.addItem(producto);
+
             Swal.fire({
               icon: 'success',
               title: 'Producto agregado',
@@ -97,6 +103,7 @@ export class Productos implements OnInit{
               showConfirmButton: false
             });
           },
+          
           error: (err: any) => {
             console.error(err);
             Swal.fire({

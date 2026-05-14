@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { CarritoService } from '../services/user.service'; 
+import { CartService } from '../core/cart.service';
 
 @Component({
   selector: 'app-carrito',
@@ -13,12 +14,13 @@ import { CarritoService } from '../services/user.service';
 export class Carrito implements OnInit {
   pagoExitoso: boolean = false;
   facturacionCompletada: boolean = false;
-  itemsCarrito: any[] = [];
   total: number = 0;
   subtotal: number = 0;
   impuestos: number = 0;
 
   cliente: any;
+  
+  
 
 
   // Campos del formulario de pago
@@ -50,12 +52,21 @@ export class Carrito implements OnInit {
   // constructor
   constructor(
     private carritoService: CarritoService,
-    private location: Location 
+    private location: Location,
+    private cartService: CartService
   ) {}
 
+  itemsCarrito: any[] = [];
+  
   ngOnInit(): void {
 
     this.cliente = JSON.parse(localStorage.getItem('cliente') || '{}');
+    this.cartService.cartItems$.subscribe(data => {
+      this.itemsCarrito = data;
+
+      console.log('Carrito actializado',data);
+    });
+  
 
     console.log(this.cliente);
 
