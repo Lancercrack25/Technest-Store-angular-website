@@ -14,9 +14,6 @@ import { CartService } from '../core/cart.service';
 export class Carrito implements OnInit {
   pagoExitoso: boolean = false;
   facturacionCompletada: boolean = false;
-  total: number = 0;
-  subtotal: number = 0;
-  impuestos: number = 0;
 
   cliente: any;
   
@@ -57,12 +54,17 @@ export class Carrito implements OnInit {
   ) {}
 
   itemsCarrito: any[] = [];
+
+  subtotal: number = 0;
+  impuestos: number = 0;
+  total: number = 0;
   
   ngOnInit(): void {
 
     this.cliente = JSON.parse(localStorage.getItem('cliente') || '{}');
     this.cartService.cartItems$.subscribe(data => {
       this.itemsCarrito = data;
+      this.calcularTotales();
 
       console.log('Carrito actializado',data);
     });
@@ -74,17 +76,25 @@ export class Carrito implements OnInit {
 
     this.generarFolio();
   }
-  
 
+  calcularTotales() {
+
+  this.subtotal = 0;
+
+  for (let item of this.itemsCarrito) {
+
+    this.subtotal += Number(item.subtotal);
+
+  }
+
+  this.impuestos = Number((this.subtotal * 0.16).toFixed(2));
+
+  this.total = Number((this.subtotal + this.impuestos).toFixed(2));
+
+}
   cargarCarrito() {
     this.carritoService.obtenerCarrito(this.cliente.id_cliente).subscribe({
     
-      /*next: (datosDelBackend) => {
-        this.itemsCarrito = datosDelBackend;
-        this.subtotal = this.itemsCarrito.reduce((suma, item) => suma + Number(item.subtotal), 0);
-        this.impuestos = this.subtotal * 0.16;
-        this.total = this.subtotal + this.impuestos;
-      },*/
 
     next: (datosDelBackend: any) => {
 
