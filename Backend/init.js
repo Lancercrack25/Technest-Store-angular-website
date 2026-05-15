@@ -113,31 +113,30 @@ export async function initDatabase() {
     // ================= VENTA =================
     await pool.query(`
       CREATE TABLE IF NOT EXISTS venta (
-        id_venta TEXT PRIMARY KEY,
-        id_cliente INT,
-        fecha TIMESTAMP,
-        subtotal NUMERIC(10,2),
-        impuestos NUMERIC(10,2),
-        total NUMERIC(10,2),
-        estado VARCHAR(30),
-        canal VARCHAR(30),
-        notas TEXT,
-        FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
-      );
+      id_venta TEXT PRIMARY KEY,
+      id_cliente INT,
+      fecha TIMESTAMP DEFAULT NOW(),
+      subtotal NUMERIC(10,2),
+      impuestos NUMERIC(10,2),
+      total NUMERIC(10,2),
+      estado VARCHAR(20),
+      canal VARCHAR(20),
+      FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
+    );
     `);
 
     // ================= DETALLE VENTA =================
     await pool.query(`
       CREATE TABLE IF NOT EXISTS detalle_venta (
-        id_detalle SERIAL PRIMARY KEY,
-        id_venta TEXT,
-        id_producto VARCHAR(10),
-        cantidad INT,
-        precio_unitario NUMERIC(10,2),
-        descuento NUMERIC(5,2),
-        subtotal NUMERIC(10,2),
-        FOREIGN KEY (id_venta) REFERENCES venta(id_venta),
-        FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+      id_detalle TEXT PRIMARY KEY,
+      id_venta TEXT,
+      id_producto TEXT,
+      cantidad INT,
+      precio_unitario NUMERIC(10,2),
+      descuento NUMERIC(10,2),
+      subtotal NUMERIC(10,2),
+      FOREIGN KEY (id_venta) REFERENCES venta(id_venta),
+      FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
       );
     `);
 
@@ -148,8 +147,7 @@ export async function initDatabase() {
         id_venta TEXT,
         monto NUMERIC(10,2),
         metodo_pago VARCHAR(50),
-        referencia VARCHAR(100),
-        fecha_pago TIMESTAMP,
+        fecha_pago TIMESTAMP DEFAULT NOW(),
         estado VARCHAR(20),
         FOREIGN KEY (id_venta) REFERENCES venta(id_venta)
       );
@@ -158,30 +156,29 @@ export async function initDatabase() {
     // ================= ENVIO =================
     await pool.query(`
       CREATE TABLE IF NOT EXISTS envio (
-        id_envio SERIAL PRIMARY KEY,
-        id_venta VARCHAR(10),
-        transportista VARCHAR(100),
-        num_guia VARCHAR(50),
-        direccion_destino VARCHAR(200),
-        fecha_envio TIMESTAMP,
-        fecha_entrega DATE,
-        estado VARCHAR(30),
-        FOREIGN KEY (id_venta) REFERENCES venta(id_venta)
-      );
+      id_envio TEXT PRIMARY KEY,
+      id_venta TEXT,
+      transportista VARCHAR(50),
+      num_guia VARCHAR(50),
+      direccion_destino TEXT,
+      fecha_envio TIMESTAMP DEFAULT NOW(),
+      estado VARCHAR(20),
+      FOREIGN KEY (id_venta) REFERENCES venta(id_venta)
+    );
     `);
 
     // ================= FACTURA =================
     await pool.query(`
       CREATE TABLE IF NOT EXISTS factura (
-        id_factura SERIAL PRIMARY KEY,
-        id_venta VARCHAR(10) UNIQUE,
-        rfc_cliente VARCHAR(13),
-        razon_social VARCHAR(150),
-        direccion_fiscal VARCHAR(200),
-        uso_cfdi VARCHAR(10),
-        fecha_emision TIMESTAMP,
-        total NUMERIC(10,2),
-        FOREIGN KEY (id_venta) REFERENCES venta(id_venta)
+      id_factura TEXT PRIMARY KEY,
+      id_venta TEXT,
+      rfc_cliente VARCHAR(20),
+      razon_social VARCHAR(150),
+      direccion_fiscal TEXT,
+      uso_cfdi VARCHAR(10),
+      fecha_emision TIMESTAMP DEFAULT NOW(),
+      total NUMERIC(10,2),
+      FOREIGN KEY (id_venta) REFERENCES venta(id_venta)
       );
     `);
 

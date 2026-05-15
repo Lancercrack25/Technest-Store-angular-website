@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { CartService } from '../core/cart.service';
+import { CartService } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { Navbar } from '../navbar/navbar';
 

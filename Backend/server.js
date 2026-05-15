@@ -260,13 +260,20 @@ app.post('/carrito/detalle', async (req, res) => {
 // ==================== VENTAS ====================
 app.post('/ventas', async (req, res) => {
   const client = await pool.connect();
+
   try {
     const { id_cliente, detalles, metodo_pago, direccion_envio } = req.body;
+
     await client.query('BEGIN');
 
     let subtotal = 0;
+
     for (const d of detalles) {
-      const prod = await client.query(`SELECT precio FROM producto WHERE id_producto=$1`, [d.id_producto]);
+      const prod = await client.query(
+        `SELECT precio FROM producto WHERE id_producto=$1`,
+        [d.id_producto]
+      );
+
       subtotal += prod.rows[0].precio * d.cantidad;
     }
 
@@ -274,45 +281,92 @@ app.post('/ventas', async (req, res) => {
     const total = subtotal + impuestos;
 
     const v = await client.query(`
-      INSERT INTO venta (id_venta,id_cliente,fecha,subtotal,impuestos,total,estado,canal)
-      VALUES (gen_random_uuid()::text,$1,NOW(),$2,$3,$4,'Completada','Web')
+      INSERT INTO venta
+      (id_venta, id_cliente, fecha, subtotal, impuestos, total, estado, canal)
+      VALUES (gen_random_uuid()::text, $1, NOW(), $2, $3, $4, 'Completada', 'Web')
       RETURNING *
     `, [id_cliente, subtotal, impuestos, total]);
 
+    const idVenta = v.rows[0].id_venta;
+
+    // 🔥 FIX CLAVE: id_detalle generado aquí
     for (const d of detalles) {
-      const prod = await client.query(`SELECT precio FROM producto WHERE id_producto=$1`, [d.id_producto]);
+      const prod = await client.query(
+        `SELECT precio FROM producto WHERE id_producto=$1`,
+        [d.id_producto]
+      );
+
       await client.query(`
-        INSERT INTO detalle_venta (id_venta,id_producto,cantidad,precio_unitario,descuento,subtotal)
-        VALUES ($1,$2,$3,$4,0,$5)
-      `, [v.rows[0].id_venta, d.id_producto, d.cantidad, prod.rows[0].precio, prod.rows[0].precio * d.cantidad]);
+        INSERT INTO detalle_venta
+        (id_detalle, id_venta, id_producto, cantidad, precio_unitario, descuento, subtotal)
+        VALUES (gen_random_uuid()::text, $1, $2, $3, $4, 0, $5)
+      `, [
+        idVenta,
+        d.id_producto,
+        d.cantidad,
+        prod.rows[0].precio,
+        prod.rows[0].precio * d.cantidad
+      ]);
     }
 
     await client.query(`
-      INSERT INTO pago (id_pago,id_venta,monto,metodo_pago,fecha_pago,estado)
-      VALUES (gen_random_uuid()::text,$1,$2,$3,NOW(),'Aprobado')
-    `, [v.rows[0].id_venta, total, metodo_pago]);
+      INSERT INTO pago
+      (id_pago, id_venta, monto, metodo_pago, fecha_pago, estado)
+      VALUES (gen_random_uuid()::text, $1, $2, $3, NOW(), 'Aprobado')
+    `, [idVenta, total, metodo_pago]);
 
     await client.query(`
-      INSERT INTO envio (id_venta,transportista,num_guia,direccion_destino,fecha_envio,estado)
-      VALUES ($1,'Pendiente','N/A',$2,NOW(),'Preparando')
-    `, [v.rows[0].id_venta, direccion_envio]);
+      INSERT INTO envio
+      (id_envio, id_venta, transportista, num_guia, direccion_destino, fecha_envio, estado)
+      VALUES (gen_random_uuid()::text, $1, 'Pendiente', 'N/A', $2, NOW(), 'Preparando')
+    `, [idVenta, direccion_envio]);
 
     await client.query(`
-      INSERT INTO factura (id_venta,rfc_cliente,razon_social,direccion_fiscal,uso_cfdi,fecha_emision,total)
-      VALUES ($1,'XAXX010101000','Publico General',$2,'G03',NOW(),$3)
-    `, [v.rows[0].id_venta, direccion_envio, total]);
+      INSERT INTO factura
+      (id_factura, id_venta, rfc_cliente, razon_social, direccion_fiscal, uso_cfdi, fecha_emision, total)
+      VALUES (gen_random_uuid()::text, $1, 'XAXX010101000', 'Publico General', $2, 'G03', NOW(), $3)
+    `, [idVenta, direccion_envio, total]);
 
     await client.query('COMMIT');
+
     res.json({ ok: true, venta: v.rows[0] });
+
   } catch (error) {
     await client.query('ROLLBACK');
     res.status(500).json({ error: error.message });
+
   } finally {
     client.release();
   }
 });
 
-//endpoint para esto de los pedidos
+app.get('/ventas', async (_, res) => {
+  try {
+    const r = await pool.query(`
+      SELECT v.*, c.nombre AS cliente
+      FROM venta v
+      LEFT JOIN cliente c ON v.id_cliente = c.id_cliente
+      ORDER BY v.fecha DESC
+    `);
+    res.json(r.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/ventas/:id/cancelar', async (req, res) => {
+  try {
+    const r = await pool.query(`
+      UPDATE venta SET estado = 'Cancelada'
+      WHERE id_venta = $1 RETURNING *
+    `, [req.params.id]);
+
+    res.json(r.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.get('/pedidos/:idCliente', async (req, res) => {
   try {
     const r = await pool.query(`
@@ -339,12 +393,12 @@ app.get('/pedidos/:idCliente', async (req, res) => {
       GROUP BY v.id_venta, v.fecha, v.total, v.estado, v.canal, e.estado, e.transportista, e.num_guia
       ORDER BY v.fecha DESC
     `, [req.params.idCliente]);
+
     res.json(r.rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 //===================== ENVÍOS ====================
 app.get('/envios', async (_, res) => {
@@ -356,6 +410,7 @@ app.get('/envios', async (_, res) => {
       LEFT JOIN cliente c ON v.id_cliente = c.id_cliente
       ORDER BY e.fecha_envio DESC
     `);
+
     res.json(r.rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
