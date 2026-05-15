@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../core/cart.service';
 import { FormsModule } from '@angular/forms';
@@ -8,11 +9,11 @@ import { Navbar } from '../navbar/navbar';
 
 
 @Component({
-  selector: 'app-productos',
+   selector: 'app-productos',
   standalone: true,
-  imports: [Navbar, FormsModule],
+  imports: [CommonModule,Navbar, FormsModule],
   templateUrl: './productos.html',
-  styleUrl: './productos.css',
+  styleUrls: ['./productos.css'],
 })
 
 export class Productos implements OnInit{
@@ -117,5 +118,4 @@ export class Productos implements OnInit{
       }
     });
   }
-
 }
