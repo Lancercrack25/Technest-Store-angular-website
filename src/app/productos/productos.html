@@ -52,6 +52,23 @@
 
     </div>
 
+    <!-- SKELETON LOADING -->
+    
+        @if (loading) {
+
+        <div class="skeleton-grid">
+
+            @for (item of [1,2,3,4]; track item) {
+
+            <div class="skeleton-card"></div>
+
+            }
+
+        </div>
+
+        }
+
+
     <!-- PRODUCTOS -->
 
     <div class="contenedor-productos">

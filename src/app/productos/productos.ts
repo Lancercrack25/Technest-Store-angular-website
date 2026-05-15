@@ -22,6 +22,8 @@ export class Productos implements OnInit{
   productosFiltrados: any[] = [];
   busqueda: string = '';
 
+  loading = true;
+
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
@@ -35,6 +37,12 @@ export class Productos implements OnInit{
     this.productosFiltrados = [...this.productos];
 
     console.log('Productos cargados:', this.productos);
+
+    setTimeout(() => {
+
+      this.loading = false;
+
+      }, 1500);
   }
 
 
