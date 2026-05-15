@@ -1,45 +1,80 @@
 <app-navbars></app-navbars>
 
-<div class="busqueda-container">
+<div class="productos-page">
 
-    <input
-        type="text"
-        placeholder="Buscar productos..."
-        [(ngModel)]="busqueda"
-        (input)="filtrarProductos()"
-        class="input-busqueda"
-    />
+    <!-- HEADER -->
 
-</div>
+    <div class="header-productos">
 
-<div class="contenedor-productos">
+        <h1>Productos</h1>
 
-    @for (producto of productosFiltrados; track producto.id_producto) {
-
-    <div class="card-producto">
-
-        <img
-            [src]="producto.imagen"
-            alt="Producto"
-            class="imagen-producto"
-        />
-
-        <h2>{{ producto.nombre }}</h2>
-
-        <p class="descripcion">
-            {{ producto.descripcion }}
+        <p>
+            Explora hardware y componentes
+            de alto rendimiento
         </p>
 
-        <p class="precio">
-            $ {{ producto.precio }}
-        </p>
+        <div class="busqueda-container">
 
-        <button (click)="agregarAlCarrito(producto)">
-            Agregar al carrito
-        </button>
+            <input
+                type="text"
+                placeholder="Buscar productos..."
+                [(ngModel)]="busqueda"
+                (input)="filtrarProductos()"
+                class="input-busqueda"
+            />
+
+        </div>
 
     </div>
 
-    }
+    <!-- PRODUCTOS -->
+
+    <div class="contenedor-productos">
+
+        @for (producto of productosFiltrados; track producto.id_producto) {
+
+        <div class="card-producto">
+
+            <div class="imagen-container">
+
+                <img
+                    [src]="producto.imagen"
+                    alt="Producto"
+                    class="imagen-producto"
+                />
+
+            </div>
+
+            <div class="contenido-card">
+
+                <h2>
+                    {{ producto.nombre }}
+                </h2>
+
+                <p class="descripcion">
+                    {{ producto.descripcion }}
+                </p>
+
+                <div class="footer-card">
+
+                    <p class="precio">
+                        $ {{ producto.precio }}
+                    </p>
+
+                    <button
+                        (click)="agregarAlCarrito(producto)"
+                    >
+                        Agregar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
 
 </div>
