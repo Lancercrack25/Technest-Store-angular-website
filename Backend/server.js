@@ -257,6 +257,21 @@ app.post('/carrito/detalle', async (req, res) => {
   res.json(r.rows[0]);
 });
 
+app.put('/carrito/cerrar/:idCliente', async (req, res) => {
+  try {
+    await pool.query(`
+      UPDATE carrito
+      SET estado = 'Cerrado'
+      WHERE id_cliente = $1 AND estado = 'Activo'
+    `, [req.params.idCliente]);
+
+    res.json({ ok: true });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ==================== VENTAS ====================
 app.post('/ventas', async (req, res) => {
   const client = await pool.connect();

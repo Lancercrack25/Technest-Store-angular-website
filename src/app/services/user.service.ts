@@ -30,33 +30,6 @@ export class UserService {
   }
 }
 
-//servicio para manejar el carrito de compras, se encarga de obtener los datos del carrito desde el backend y también de agregar productos al carrito
-@Injectable({
-  providedIn: 'root'
-})
-export class CarritoService {
-  removeItem(id_producto: any) {
-    throw new Error('Method not implemented.');
-  }
-  private apiUrl = 'http://localhost:3000/carrito'; 
-
-  constructor(private http: HttpClient) { }
-
-  obtenerCarrito(idCliente: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${idCliente}`);
-  }
-
-  agregarAlCarrito(idCliente: number, idProducto: string, cantidad: number, precioUnitario: number): Observable<any> {
-    const body = {
-      id_cliente: idCliente,
-      id_producto: idProducto,
-      cantidad: cantidad,
-      precio_unitario: precioUnitario
-    };
-    return this.http.post(`${this.apiUrl}/agregar`, body);
-  }
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -74,7 +47,10 @@ export class IaService {
 @Injectable({
   providedIn: 'root'
 })
+
 export class CartService {
+
+  private api = 'http://localhost:3000';
 
   private carritoInicial: any[] = JSON.parse(
     localStorage.getItem('carrito') || '[]'
@@ -84,10 +60,18 @@ export class CartService {
 
   cartItems$ = this.cartItems.asObservable();
 
-  constructor() {}
+  constructor(
+    private http: HttpClient
+  ) {}
+
+  // =========================
+  // CARRITO LOCAL
+  // =========================
 
   getItems() {
+
     return this.cartItems.value;
+
   }
 
   addItem(producto: any) {
@@ -103,7 +87,8 @@ export class CartService {
       productoExistente.cantidad += 1;
 
       productoExistente.subtotal =
-        productoExistente.cantidad * Number(productoExistente.precio);
+        productoExistente.cantidad *
+        Number(productoExistente.precio);
 
     } else {
 
@@ -144,7 +129,39 @@ export class CartService {
     this.cartItems.next([]);
 
     localStorage.removeItem('carrito');
+
   }
+
+  // =========================
+  // BACKEND
+  // =========================
+ crearVenta(data: any): Observable<any> {
+  return this.http.post(`${this.api}/ventas`, data);
 }
 
+  obtenerPedidos(idCliente: any) {
+
+    return this.http.get(
+      `${this.api}/pedidos/${idCliente}`
+    );
+
+  }
+
+  obtenerEnvios() {
+
+    return this.http.get(
+      `${this.api}/envios`
+    );
+
+  }
+
+  cerrarCarrito(idCliente: number): Observable<any> {
+  return this.http.put(`${this.api}/carrito/cerrar/${idCliente}`, {});
+}
+
+ limpiarCarrito(idCliente: number): Observable<any> {
+  return this.http.delete(`${this.api}/carrito/limpiar/${idCliente}`);
+}
+
+}
 //en este archivo se podran manejar los services de diferentes componentes
