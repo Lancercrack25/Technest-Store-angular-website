@@ -44,7 +44,7 @@
 }
 
 .stat-card {
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(0, 0, 0, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
     padding: 20px 24px;
@@ -75,7 +75,7 @@
 }
 
 .grafica-card {
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(0, 0, 0, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
     padding: 24px;
@@ -98,7 +98,7 @@
 .tabla {
     width: 100%;
     border-collapse: collapse;
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(0, 0, 0, 0.9);
 }
 
 .tabla thead tr {
@@ -181,7 +181,7 @@
     font-size: 16px;
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(2, 2, 2, 0.9);
 }
 
 @media (max-width: 1024px) {
