@@ -24,24 +24,42 @@ export class Pedidos implements OnInit {
   ) {}
 
   ngOnInit() {
-    const user = this.userService.getUser();
-    if (!user) return;
-
-    this.http.get(`http://localhost:3000/pedidos/${user.id_cliente}`)
-      .subscribe({
-        next: (res: any) => {
-          this.pedidos = res;
-          this.cargando = false;
-          this.cargado = true;
-        },
-        error: () => {
-          this.cargando = false;
-          this.cargado = true;
-        }
-      });
+  // intenta con caché primero
+  if (typeof window !== 'undefined') {
+    const cached = sessionStorage.getItem('pedidos');
+    if (cached) {
+      this.pedidos = JSON.parse(cached);
+      this.cargando = false;
+      this.cargado = true;
+    }
   }
 
-  formatearFecha(fecha: string): string {
+  // suscríbete al usuario para cuando esté disponible
+  this.userService.user$.subscribe(user => {
+    if (user) {
+      this.cargarPedidos(user.id_cliente);
+    }
+  });
+}
+
+  cargarPedidos(idCliente: number) {
+  this.http.get(`http://localhost:3000/pedidos/${idCliente}`)
+    .subscribe({
+      next: (res: any) => {
+        this.pedidos = res;
+        this.cargando = false;
+        this.cargado = true;
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('pedidos', JSON.stringify(res));
+        }
+      },
+      error: () => {
+        this.cargando = false;
+        this.cargado = true;
+      }
+    });
+  }
+    formatearFecha(fecha: string): string {
     return new Date(fecha).toLocaleDateString('es-MX', {
       day: '2-digit', month: 'short', year: 'numeric'
     });

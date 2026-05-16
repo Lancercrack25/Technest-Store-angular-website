@@ -1,39 +1,59 @@
 <app-navbars></app-navbars>
 <div class="pedidos-container">
+
   <h2 class="title">MIS PEDIDOS <span class="accent">_</span></h2>
-  
-  <div class="table-wrapper">
-    <table class="stealth-table">
-      <thead>
-        <tr>
-          <th>ID ORDEN</th>
-          <th>FECHA</th>
-          <th>TOTAL</th>
-          <th>ESTADO</th>
-          <th>ACCIONES</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pedido of pedidos" [ngClass]="{'row-cancelled': pedido.estado === 'Cancelado'}">
-          <td class="order-id">{{ pedido.id }}</td>
-          <td>{{ pedido.fecha }}</td>
-          <td>${{ pedido.total | number:'1.2-2' }}</td>
-          <td>
-            <span class="status-badge" [attr.data-status]="pedido.estado">
-              {{ pedido.estado }}
-            </span>
-          </td>
-          <td>
-            <button 
-              *ngIf="pedido.estado === 'Pendiente'" 
-              class="btn-cancel" 
-              (click)="cancelarPedido(pedido.id)">
-              CANCELAR
-            </button>
-            <span *ngIf="pedido.estado !== 'Pendiente'" class="no-action">-</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
+  @if (cargando) {
+    <div class="loading">Cargando pedidos...</div>
+  }
+
+  @if (cargado && pedidos.length === 0) {
+    <div class="empty">No tienes pedidos registrados</div>
+  }
+
+  @if (cargado && pedidos.length > 0) {
+    <div class="table-wrapper">
+      <table class="stealth-table">
+        <thead>
+          <tr>
+            <th>ID Orden</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Envío</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (pedido of pedidos; track $index) {
+            <tr [class.row-cancelled]="pedido.estado === 'Cancelada'">
+              <td class="order-id">{{ pedido.id_venta }}</td>
+              <td>{{ formatearFecha(pedido.fecha) }}</td>
+              <td>{{ formatearMonto(pedido.total) }}</td>
+              <td>
+                <span class="status-badge" [attr.data-status]="pedido.estado">
+                  {{ pedido.estado }}
+                </span>
+              </td>
+              <td>
+                <span class="status-badge" [attr.data-status]="pedido.estado_envio">
+                  {{ pedido.estado_envio || '—' }}
+                </span>
+              </td>
+              <td>
+                @if (pedido.estado === 'Completada') {
+                  <button class="btn-cancel" (click)="cancelarPedido(pedido.id_venta)">
+                    Cancelar
+                  </button>
+                } @else {
+                  <span class="no-action">—</span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
 </div>

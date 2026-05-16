@@ -1,16 +1,22 @@
 <div class="carrito-wrapper">
   <div class="carrito-container">
     
-    <button *ngIf="!pagoExitoso" (click)="regresar()" class="btn-regresar">
+    <!-- BOTÓN REGRESAR GENERAL -->
+    <button *ngIf="!pagoExitoso && !facturacionCompletada" (click)="regresar()" class="btn-regresar">
       ← Regresar
     </button>
     
-    <h2 class="carrito-titulo"> 
-      Mi Carrito de Compras 🛒 </h2>
+    <!-- TÍTULO DINÁMICO -->
+    <h2 class="carrito-titulo" *ngIf="!facturacionCompletada"> 
+      Mi Carrito de Compras 🛒
+    </h2>
 
+    <!-- ========================================== -->
+    <!-- FASE 2: FORMULARIO DE PAGO                 -->
+    <!-- ========================================== -->
     <div *ngIf="pagoExitoso && !facturacionCompletada" class="mensaje-exito">
-      <button (click)="regresar()" class="btn-regresar">
-        ← Regresar
+      <button (click)="pagoExitoso = false" class="btn-regresar">
+        ← Volver al Carrito
       </button>
       <h3 class="exito-titulo">Ingrese método de pago 💳</h3>
 
@@ -42,10 +48,10 @@
       </button>
     </div>
 
+    <!-- ========================================== -->
+    <!-- FASE 3: VISTA DE LA FACTURA GENERADA      -->
+    <!-- ========================================== -->
     <div *ngIf="facturacionCompletada" class="mensaje-exito">
-      <button (click)="regresar()" class="btn-regresar">
-        ← Regresar
-      </button>
       <h3 class="exito-titulo">Factura Generada 📄</h3>
 
       <div class="factura-container">
@@ -61,6 +67,7 @@
           </div>
         </div>
 
+        <!-- DATOS DEL CLIENTE -->
         <div class="factura-seccion">
           <h4 class="factura-subtitulo">Datos del Cliente</h4>
           <div class="factura-grid">
@@ -83,6 +90,7 @@
           </div>
         </div>
 
+        <!-- DIRECCIÓN FISCAL -->
         <div class="factura-seccion">
           <h4 class="factura-subtitulo">Dirección Fiscal</h4>
           <div class="factura-grid">
@@ -109,6 +117,7 @@
           </div>
         </div>
 
+        <!-- OPCIONES CFDI / SAT -->
         <div class="factura-seccion">
           <h4 class="factura-subtitulo">Datos de Facturación</h4>
           <div class="factura-grid">
@@ -156,6 +165,7 @@
           </div>
         </div>
 
+        <!-- 🔥 TABLA DE CONCEPTOS CORREGIDA (Usa itemsFactura) -->
         <div class="factura-seccion">
           <h4 class="factura-subtitulo">Conceptos</h4>
           <table class="factura-tabla">
@@ -168,7 +178,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of itemsCarrito">
+              <tr *ngFor="let item of itemsFactura">
                 <td>{{ item.nombre }}</td>
                 <td>{{ item.cantidad }}</td>
                 <td>${{ item.precio }}</td>
@@ -179,20 +189,19 @@
         </div>
 
         <div class="factura-totales">
-          <div class="total-row">
-            <span>Subtotal:</span>
-            <span>${{ subtotal }}</span>
-          </div>
-          <div class="total-row">
-            <span>IVA (16%):</span>
-            <span>${{ impuestos }}</span>
-          </div>
-          <div class="total-row total-final">
-            <span>Total:</span>
-            <span>${{ total }}</span>
-          </div>
-        </div>
-
+  <div class="total-row">
+    <span>Subtotal:</span>
+    <span>${{ subtotalFactura }}</span>
+  </div>
+  <div class="total-row">
+    <span>IVA (16%):</span>
+    <span>${{ impuestosFactura }}</span>
+  </div>
+  <div class="total-row total-final">
+    <span>Total:</span>
+    <span>${{ totalFactura }}</span>
+  </div>
+</div>
         <div class="factura-footer">
           <p>Este documento es una representación gráfica de la factura.</p>
           <p>Para efectos fiscales consulte la factura electrónica en el portal del SAT.</p>
@@ -209,53 +218,35 @@
       </div>
     </div>
 
-    <div *ngIf="!pagoExitoso">
+    <!-- ========================================== -->
+    <!-- FASE 1: VISTA NORMAL DEL CARRITO          -->
+    <!-- ========================================== -->
+    <div *ngIf="!pagoExitoso && !facturacionCompletada">
 
+      <!-- Carrito Vacío -->
       <div *ngIf="itemsCarrito.length === 0" class="carrito-vacio">
-        <p class="texto-vacio-principal">
-          Tu carrito está vacío.
-        </p>
-        <p class="texto-vacio-secundario">
-          Escoge tus productos en la "sección de Productos" para armar tu carrito...
-        </p>
+        <p class="texto-vacio-principal">Tu carrito está vacío.</p>
+        <p class="texto-vacio-secundario">Escoge tus productos en la "sección de Productos" para armar tu carrito...</p>
       </div>
 
+      <!-- Lista de Productos en Carrito -->
       <div *ngIf="itemsCarrito.length > 0" class="carrito-lleno">
         <ul class="lista-items">
-
           <li *ngFor="let item of itemsCarrito" class="item-fila">
             <div>
-              <strong class="item-nombre">
-                {{ item.nombre }}
-              </strong>
-              <p class="item-detalles">
-                Cantidad: {{ item.cantidad }} | Precio: ${{ item.precio }}
-              </p>
-
-              <button
-                class="btn-eliminar"
-                (click)="eliminarItem(item.id_producto)">
-
-                Eliminar
-
-              </button>
-
+              <strong class="item-nombre">{{ item.nombre }}</strong>
+              <p class="item-detalles">Cantidad: {{ item.cantidad }} | Precio: ${{ item.precio }}</p>
+              <button class="btn-eliminar" (click)="eliminarItem(item.id_producto)">Eliminar</button>
             </div>
-            <div class="item-subtotal">
-              ${{ item.subtotal }}
-            </div>
-            
+            <div class="item-subtotal">${{ item.subtotal }}</div>
           </li>
         </ul>
-      </div>
 
-      <div class="carrito-footer">
-        <h3 class="carrito-total">
-          Total: ${{ total }} mxn
-        </h3>
-        <button class="btn-pagar" (click)="procederPago()"> 
-          Pagar
-        </button>
+        <!-- Footer del Carrito Dinámico -->
+        <div class="carrito-footer">
+          <h3 class="carrito-total">Total: ${{ total }} mxn</h3>
+          <button class="btn-pagar" (click)="procederPago()">Pagar</button>
+        </div>
       </div>
 
     </div>
