@@ -44,7 +44,6 @@ export const routes: Routes = [
       productos: ProductosResolver
     }
   },
-  
   { path: 'recomendador', component: Recomendador},
   { path: 'pedidos', component: Pedidos},
   { path: 'ventas', component: Ventas},
